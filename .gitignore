@@ -1,3 +1,9 @@
-#/vendor
-/public/content
-/public/uploadtemp
+/vendor
+/public_html/content
+/public_html/uploadtemp
+/bootstrap
+/app/config/production
+/app/config/local
+/app/config/fb_auth.php
+/app/config/google_auth.php
+/app/config/mail.php

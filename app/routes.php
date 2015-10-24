@@ -1,4 +1,6 @@
 <?php
+
+
 // Queue::getIron()->ssl_verifypeer = false;
 View::share('title', "Exprime");
 
@@ -36,7 +38,7 @@ Route::group([ 'prefix' => 'admin', 'namespace' => 'backend' ], function () {
 	Route::resource('keyword', 'KeywordController');
 	Route::resource('error', 'ErrorController');
 	Route::resource('statistic', 'StatisticController');
-	
+
 });
 
 Route::group(['namespace' => 'frontend' ], function () {
