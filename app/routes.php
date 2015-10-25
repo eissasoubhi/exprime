@@ -1,7 +1,6 @@
 <?php
 
 
-// Queue::getIron()->ssl_verifypeer = false;
 View::share('title', "Exprime");
 
 $pictures_count = Picture::all()->count();
