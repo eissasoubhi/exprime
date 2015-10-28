@@ -21,7 +21,7 @@
                         <input id="search-keywors" data-role="tagsinput" data-container-class="img-keyword" name="search-keywors" type="text" placeholder="" class="form-control" value="{{$keywords}}">
                       </div>
                       <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                    </div>                    
+                    </div>
                   </div>
                   <div class="form-group message">
                     @if($errors->all())
@@ -50,7 +50,8 @@
                         <div class="uploaded-img">
                           <input class="img-btn-upload" id="upload-img-btn" accept="image/*" type="file"  name="Filedata" value="" placeholder="">
                           <div class="table-cell fa fa-edit"><img src="{{url('content/'.$image->url_origin)}}" class="img-responsive" id="{{$image->id}}"></div>
-                        </div> 
+                          <input type="hidden" name="editedImg" class="editedImg" value="">
+                        </div>
                         <div class="alert alert-danger up-error"></div>
                         <div class="text-center">
                           <small class="img-name"></small>
@@ -68,7 +69,7 @@
                         <button type="button" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-refresh"></i> Charger l'image</button>
                         <button  type="submit" class="btn btn-block btn-primary btn-upload"><span class="glyphicon glyphicon-ok"></span> Modifier</button>
                     </div>
-                {{ Form::close() }} 
+                {{ Form::close() }}
             </div>
         </div>
     </div><!-- /.container -->

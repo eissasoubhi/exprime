@@ -8,6 +8,9 @@
 		"iron-io/iron_mq": "~3.0",
 		"hybridauth/hybridauth" : "dev-master"
 	},
+	"require-dev": {
+		"fzaninotto/faker":"dev-master"
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",

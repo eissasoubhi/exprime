@@ -7,7 +7,7 @@ class Picture extends Eloquent    {
 
 	public function user()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsToUser('User');
 	}
 
     public function clipedName()
@@ -76,5 +76,10 @@ class Picture extends Eloquent    {
             $q->whereRaw('user_id = ? and picture_id = ?', array($user_id, $picture->id));
 
         })->exists();
+    }
+
+    public function belongsToUser(User $user)
+    {
+        return $this->user_id == $user->id;
     }
 }

@@ -1,9 +1,9 @@
 @extends('frontend.layouts.main')
 	@section('content')
         <div class="slider row">
-            
+
             <h1>Exprimez-vous plus avec des photos commentées <span>:)</span></h1>
-            <a href="#" class="explore btn btn-primary fadeIn wow animated" title="Explorer"><i class="fa fa-search"></i> Explorer</a>
+            <a href="{{url('explorer')}}" class="explore btn btn-primary fadeIn wow animated" title="Explorer"><i class="fa fa-search"></i> Explorer</a>
             <div class="overly" ></div>
         </div>
         <div class="content container">

@@ -13,7 +13,7 @@ $(document).ready(function() {
         }
     });
     $('.search input[type="text"], .hidden-search input[type="text"]').keypress(function(event) {
-       $('.search input[type="text"], .hidden-search input[type="text"]').val($(this).val()) 
+       $('.search input[type="text"], .hidden-search input[type="text"]').val($(this).val())
     });
 
     $('.dropdown-block').multiselect({
@@ -45,14 +45,14 @@ $(document).ready(function() {
             $(".img-progress").fadeIn(500);
             urlImgUploading () ;
         }
-        function uploaded () {  
+        function uploaded () {
           $(".uploaded-img").removeClass('img-drop-zone');
           $('form.img-upload').removeClass('uploading');
           $('form.img-upload input:not([type="file"]), form.img-upload [type="submit"]').removeAttr('disabled');
         }
         function urlImgUploaded () {
             uploaded();
-            $('.img-btn-upload').val('');            
+            $('.img-btn-upload').val('');
         }
         function imgUploaded () {
             $(".img-progress").fadeOut(500);
@@ -78,10 +78,10 @@ $(document).ready(function() {
           $('.table-cell.fa').click(openFileDialog);
         }
         function getImageUrl (file) {
-            if (/^image/.test( file.type)){ 
-                var reader = new FileReader(); 
+            if (/^image/.test( file.type)){
+                var reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onloadend = function(){ 
+                reader.onloadend = function(){
                   imgPreview(this);
                 }
             }
@@ -89,7 +89,7 @@ $(document).ready(function() {
         $(".img-btn-upload").on("change", function()
         {
             var files = !!this.files ? this.files : [];
-            if (!files.length || !window.FileReader) return; 
+            if (!files.length || !window.FileReader) return;
             var file = this.files[0];
             var size = file.size;
             var type = file.type;
@@ -115,9 +115,10 @@ $(document).ready(function() {
 
             getImageUrl(file);
             imgUploading();
-            var root = +document.location.hostname;
+            var host = +document.location.hostname;
             var local = 'http://localhost:8000';
-            $(".img-btn-upload").upload(local+"/tempup",function  (targetFile) {
+            var root = (host === "localhost") ? local : host;
+            $(".img-btn-upload").upload(root+"/tempup",function  (targetFile) {
               imgUploaded();
               $('.table-cell img').attr({
                 src: targetFile,
@@ -142,7 +143,7 @@ $(document).ready(function() {
             msg = "";
             img = new Image();
             urlImgUploading();
-            $(img).load(function(){              
+            $(img).load(function(){
               urlImgUploaded();
               urlImgPreview(this)
 
@@ -190,6 +191,7 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
          onSave: function(imageID, newURL) {
              var img = document.getElementById(imageID);
              img.src = newURL;
+             $('.editedImg').val(newURL);
          },
          onError: function(errorObj) {
              alert(errorObj.message);
@@ -280,7 +282,7 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
      .fail(function() {
        console.log("like error file:default.js");
      })
-     
+
    })
    $('.show-wait').click(function(event) {
      event.preventDefault();

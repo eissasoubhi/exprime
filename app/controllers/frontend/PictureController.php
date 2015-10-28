@@ -1,6 +1,6 @@
 <?php
 namespace frontend;
-use View; use Picture; use Input; use Redirect; use Validator; use Session; use Auth; use Hash; use Resize; 
+use View; use Picture; use Input; use Redirect; use Validator; use Session; use Auth; use Hash; use Resize;
 use File; use Keyword; use PictureKeyword; use Route; use Error; use Request; use Like; use Paginator;
 class PictureController extends \BaseController {
 
@@ -46,24 +46,24 @@ class PictureController extends \BaseController {
 		if (Input::file('Filedata')) {
 			list($width, $height) = getimagesize(Input::file('Filedata')->getRealPath());
 			$size = Input::file('Filedata')->getSize();
-			$extension = Input::file('Filedata')->getClientOriginalExtension();	
+			$extension = Input::file('Filedata')->getClientOriginalExtension();
 		}
 		elseif($img_url)
 		{
 			$imageinfos = getimagesize($img_url);
 			$width = $imageinfos[0];
 			$height = $imageinfos[1];
-			$extension = strtolower(str_replace("image/", "", $imageinfos['mime']));		
+			$extension = strtolower(str_replace("image/", "", $imageinfos['mime']));
 			$tmp_img = public_path()."/uploadtemp/".time().".".$extension;
-	
-			ini_set('max_execution_time', 3000); 
+
+			ini_set('max_execution_time', 3000);
 			$size = strlen(file_get_contents($img_url));
 			// return dd($size);
-			
+
 		}
 		else
 		{
-			
+
 		}
 		if (in_array($extension, $fileTypes)) {
 
@@ -85,7 +85,7 @@ class PictureController extends \BaseController {
 		    		'height' => 'required|integer|min:207',
 		    		'size' => 'required|integer|max:1048576') // 1MB
 			);
-			
+
 			if ($validator->fails())
 			{
 				$messages = $validator->messages();
@@ -99,18 +99,18 @@ class PictureController extends \BaseController {
 			{
 				copy($img_url, rtrim($targetPath,'/')."/".$full_name);
 			}
-			
-			
+
+
 			if ($width > 550 || $height > 400) {
-				
+
 				$targetFile = rtrim($targetPath,'/') . '/' . $full_name;
-				
+
 				$resizeObj = new Resize($targetFile);
 				// *** 2) Resize image (options: exact, portrait, landscape, auto, crop)
 				$resizeObj -> resizeImage(550, 400, 'auto');
-				
+
 				$resizeObj -> saveImage($targetFile, 100);
-				
+
 				list($width, $height) = getimagesize($targetFile);
 
 				$size = filesize($targetFile);
@@ -128,13 +128,13 @@ class PictureController extends \BaseController {
 				$keyword = Keyword::whereKeyword($kw)->first();
 				if (!$keyword) {
 					$keyword = Keyword::create(array('keyword' => $kw,
-											'user_id' => Auth::id()));				
+											'user_id' => Auth::id()));
 				}
 				PictureKeyword::create(array('picture_id' => $picture->id,
-										  		'keyword_id'=> $keyword->id));	
+										  		'keyword_id'=> $keyword->id));
 			}
 			return Redirect::to("explorer")->with("new_added_pic_id", $picture->id);
-		}			
+		}
 	}
 
 	public function show($id)
@@ -165,10 +165,12 @@ class PictureController extends \BaseController {
 	public function update($id)
 	{
 		$picture = Input::all();
+		// dd($picture);
 		$image = Picture::find($id);
 		$name =  str_replace(array(' ',"'","__"), "-",$picture['img-name']);
 		$search_keywors =  $picture['search-keywors'];
 		$img_url =  $picture['img-url'];
+		$editedImgUrl =  $picture['editedImg'];
 		$targetFolder = '/content'; // Relative to the root
 		$targetPath = public_path() . $targetFolder;
 		// $token =  $picture['token'];
@@ -180,29 +182,39 @@ class PictureController extends \BaseController {
 		if (Input::file('Filedata')) {
 			list($width, $height) = getimagesize(Input::file('Filedata')->getRealPath());
 			$size = Input::file('Filedata')->getSize();
-			$extension = Input::file('Filedata')->getClientOriginalExtension();	
+			$extension = Input::file('Filedata')->getClientOriginalExtension();
 		}
 		elseif($img_url)
 		{
 			$imageinfos = getimagesize($img_url);
 			$width = $imageinfos[0];
 			$height = $imageinfos[1];
-			$extension = strtolower(str_replace("image/", "", $imageinfos['mime']));		
+			$extension = strtolower(str_replace("image/", "", $imageinfos['mime']));
 			$tmp_img = public_path()."/uploadtemp/".time().".".$extension;
 
-			ini_set('max_execution_time', 3000); 
+			ini_set('max_execution_time', 3000);
 			$size = strlen(file_get_contents($img_url));
 			// return dd($size);
-			
+
+		}
+		elseif ($editedImgUrl) {
+			$imageinfos = getimagesize($editedImgUrl);
+			$width = $imageinfos[0];
+			$height = $imageinfos[1];
+			$extension = strtolower(str_replace("image/", "", $imageinfos['mime']));
+			$tmp_img = public_path()."/uploadtemp/".time().".".$extension;
+
+			ini_set('max_execution_time', 3000);
+			$size = strlen(file_get_contents($editedImgUrl));
 		}
 		else
 		{
 			$dimension = explode("x", $image->dimension);
 			$width = $dimension[0];
 			$height = $dimension[1];
-			$extension = pathinfo(rtrim($targetPath,'/')."/".$image->name, PATHINFO_EXTENSION);		
+			$extension = pathinfo(rtrim($targetPath,'/')."/".$image->name, PATHINFO_EXTENSION);
 
-			ini_set('max_execution_time', 3000); 
+			ini_set('max_execution_time', 3000);
 			$size = $image->size;
 		}
 		if (in_array($extension, $fileTypes)) {
@@ -221,7 +233,7 @@ class PictureController extends \BaseController {
 		    		'height' => 'required|integer|min:207',
 		    		'size' => 'required|integer|max:1048576') // 1MB
 			);
-			
+
 			if ($validator->fails())
 			{
 				$messages = $validator->messages();
@@ -236,6 +248,10 @@ class PictureController extends \BaseController {
 			{
 				copy($img_url, rtrim($targetPath,'/')."/".$full_name);
 			}
+			elseif($editedImgUrl)
+			{
+				copy($editedImgUrl, rtrim($targetPath,'/')."/".$full_name);
+			}
 			else
 			{
 				$delete_old_pic = false;
@@ -244,19 +260,19 @@ class PictureController extends \BaseController {
 			if (File::exists(rtrim($targetPath,'/')."/".$image->name) && $delete_old_pic) {
 				if (!File::delete(rtrim($targetPath,'/')."/".$image->name))
 				{
-					
+
 				}
-			} 
+			}
 			if ($width > 550 || $height > 400) {
-				
+
 				$targetFile = rtrim($targetPath,'/') . '/' . $full_name;
 				// return dd($targetFile);
 				$resizeObj = new Resize($targetFile);
 				// *** 2) Resize image (options: exact, portrait, landscape, auto, crop)
 				$resizeObj -> resizeImage(550, 400, 'auto');
-				
+
 				$resizeObj -> saveImage($targetFile, 100);
-				
+
 				list($width, $height) = getimagesize($targetFile);
 
 				$size = filesize($targetFile);
@@ -276,9 +292,9 @@ class PictureController extends \BaseController {
 				$keyword = Keyword::whereKeyword($kw)->first();
 				if (!$keyword) {
 					$keyword = Keyword::create(array('keyword' => $kw,
-											'user_id' => Auth::id()));				
+											'user_id' => Auth::id()));
 				}
-				$keyword_ids[] = $keyword->id; 	
+				$keyword_ids[] = $keyword->id;
 			}
 			$image->keywords()->sync($keyword_ids);
 			$picCount = Picture::where('id','<=',$image->id)->count();
@@ -286,8 +302,9 @@ class PictureController extends \BaseController {
 			$param = ($page !=0 && $page != 1) ? "?page=".$page : "" ;
 			// return "id : ".$image->id.", count : ".$picCount.", floor : ".$page;
 			// return "explorer".$param;
+			// dd($full_name);
 			return Redirect::to("explorer".$param)->with("new_added_pic_id", $image->id);
-		}			
+		}
 	}
 
 	public function destroy($id)
@@ -313,18 +330,18 @@ class PictureController extends \BaseController {
 										'file' => $file,
 										'line' => $line,
 										'fatal' => $fatal,
-										'type' => $type));	
+										'type' => $type));
 				}
 			}
-		} 
+		}
 		return Redirect::to("explorer");
-		
+
 	}
 
 	public function uploadTemp()
 	{
 
-		$targetFolder = '/uploadtemp'; 
+		$targetFolder = '/uploadtemp';
 
 		$verifyToken = "}&p@-n@7#)jWf[n6#Vv+2-?x%zmWK.}ERKYp59d?".Input::get('timestamp');
 
@@ -360,7 +377,7 @@ class PictureController extends \BaseController {
 			    		'height' => 'required|integer|min:207',
 			    		'size' => 'required|integer|max:1048576')
 				);
-				
+
 				if ($validator->fails())
 				{
 					$messages = $validator->messages();
@@ -384,7 +401,7 @@ class PictureController extends \BaseController {
 
 					$size = filesize($targetFile);
 				}
-				
+
 				$imageinfos = array('name' => $full_name,
 									'extension' => $extension,
 									'width' => $width,
@@ -446,11 +463,11 @@ class PictureController extends \BaseController {
 		// return $keywords;
 		$keywords = array_unique(explode(" ", $searched_words));
 		$where = "";
-		foreach ($keywords as $keyword) 
+		foreach ($keywords as $keyword)
 		{
 			$keyword = trim($keyword);
 			if ($keyword) {
-				$where .= " keyword like '%$keyword%' OR";	
+				$where .= " keyword like '%$keyword%' OR";
 			}
 		}
 		$where = trim($where);
@@ -465,7 +482,7 @@ class PictureController extends \BaseController {
 
 		foreach ($keywords as $keyword) {
 			foreach ($keyword->pictures()->get() as $picture ) {
-				isset($pictures[$picture->id]) or $pictures[$picture->id] = $picture; //remove duplicated obj 
+				isset($pictures[$picture->id]) or $pictures[$picture->id] = $picture; //remove duplicated obj
 			}
 		}
 		$perPage = 16;

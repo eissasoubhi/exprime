@@ -15,23 +15,27 @@
                                      {
                                         $class .= " pageNumber";
                                         $attr = 'data-page="1"';
-                                     } 
+                                     }
                                  ?>
                                 <div data-href="" class="brick {{$picture->id}} {{$class}} " {{$attr}}>
                                     <div class="overflow">
-                                        <div class="img-close" > 
-                                            {{Form::open(array('method' => 'DELETE', 'url' => ['img/picture/destroy/'.$picture->id]))}}
-                                                <button class="a" type="submit"><i class="fa fa-times"></i></button>
-                                            {{Form::close()}}
-                                            <div class="clear"></div> 
-                                        </div> 
-                                        <div class="hover-btns"> 
+                                        <div class="img-close" >
+                                            @if(Auth::check() and ($picture->belongsToUser(Auth::user()) or Auth::user()->hasAnyRole(array('admin','modirator'))))
+
+                                                {{Form::open(array('method' => 'DELETE', 'url' => ['img/picture/destroy/'.$picture->id]))}}
+                                                    <button class="a" type="submit"><i class="fa fa-times"></i></button>
+                                                {{Form::close()}}
+                                            @endif
+
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="hover-btns">
                                             <a href="#" title="">
                                                 <i class="fa fa-download"></i>
-                                            </a> 
+                                            </a>
                                             <a target="_blank" href="{{url('img/edit/'.$picture->id)}}" title="">
                                                 <i class="fa fa-pencil-square-o"></i>
-                                            </a> 
+                                            </a>
                                             @if(Auth::check())
                                                 <a target="_blank" class="img-like-btn" data-img-like="{{url('img/toggleLike/'.$picture->id)}}" title="">
                                                     @if($picture->has('likes'))
@@ -40,16 +44,16 @@
                                                         0
                                                     @endif
                                                      <i class="fa fa-heart-o"></i>
-                                                </a> 
+                                                </a>
                                             @endif
-                                            
+
                                             <a href="{{url('img/show/'.$picture->id)}}" title="">
                                                 <i class="fa fa-eye"></i>
-                                            </a> 
-                                            <div class="clear"></div> 
+                                            </a>
+                                            <div class="clear"></div>
                                         </div>
                                     </div>
-                                    
+
                                     <div  class="img" style="background-image: url({{url('content/'.$picture->url_origin)}})">
                                         <div class="view-hover">
                                             <img  src="{{url('content/'.$picture->url_origin)}}" alt="">
@@ -58,17 +62,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             @endforeach
                             <!-- <div class="clearfix"></div> -->
-                            {{$pictures->links()}}  
+                            {{$pictures->links()}}
                         </div>
-                         
+
                     </div>
                 </div>
         </div>
         <script type="text/javascript" charset="utf-8">
-            
+
         	$('.page').addClass('container-fluid').removeClass('container');
             function pagination_position (parent) {
                 var $pagination = $(parent).find('.pagination');
@@ -155,7 +159,7 @@
                     $('.pageNumber').each(function(index, el) {
                        if ($(this).visible(true)) {
                             pages.push($(this).attr('data-page'));
-                        }; 
+                        };
                     });
                     var url = window.location.origin + window.location.pathname
                     var pageNumber = Math.min.apply(Math,pages);
@@ -168,10 +172,10 @@
                             };
                         }
                         window.history.pushState({}, '',url + search +'page=' + pageNumber);
-     
+
                 });
                 pagination_position('.list-thumbs');
-            }); 
+            });
 
         </script>
 	@stop

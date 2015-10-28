@@ -9,6 +9,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
+    protected $fillable = array('password', 'login', 'role_id','l_name', 'f_name', 'country', 'city','confirmation_code');
+
+    protected $table = 'user';
+
+    protected $hidden = array('password', 'remember_token');
+
 	public function role()
     {
         return $this->belongsTo('Role');
@@ -32,13 +38,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function hasRole($role)
     {
-    	return strtolower($this->role->name) == strtolower( $role );
+        return strtolower($this->role->name) == strtolower( $role );
     }
 
-	protected $fillable = array('password', 'login', 'role_id','l_name', 'f_name', 'country', 'city','confirmation_code');
-
-	protected $table = 'user';
-
-	protected $hidden = array('password', 'remember_token');
+    public function hasAnyRole(array $roles)
+    {
+        foreach ($roles as $role) {
+            if ($this->hasRole($role)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
