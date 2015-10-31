@@ -192,6 +192,7 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
              var img = document.getElementById(imageID);
              img.src = newURL;
              $('.editedImg').val(newURL);
+             featherEditor.close();
          },
          onError: function(errorObj) {
              alert(errorObj.message);

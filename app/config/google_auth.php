@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    "base_url" => "http://5eae072f.ngrok.io/gauth/auth",
+    "base_url" => "http://exprime.org/gauth/auth",
     "providers" => array (
         "Google" => array (
             "enabled" => true,

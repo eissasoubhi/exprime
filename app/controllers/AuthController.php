@@ -28,6 +28,7 @@ class AuthController extends \BaseController
     //this is the code for facebook Login
     public function getFacebookLogin($auth=NULL)
     {
+        // dd($auth);
         if ($auth == 'auth')
         {
             try

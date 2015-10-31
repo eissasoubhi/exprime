@@ -1,6 +1,6 @@
 <?php
 return array(
-    "base_url" => "http://5eae072f.ngrok.io/fbauth/auth",
+    "base_url" => "http://exprime.org/fbauth/auth",
     "providers" => array (
         "Facebook" => array (
             "enabled" => TRUE,
