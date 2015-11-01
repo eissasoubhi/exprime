@@ -1,6 +1,6 @@
-<?php 
+<?php
 namespace frontend;
-use User; use View; use Input; use Validator; use Redirect;  use Hash;  use Role; use Auth; use Mail; use Hybrid_auth;  use Session; 
+use User; use View; use Input; use Validator; use Redirect;  use Hash;  use Role; use Auth; use Mail; use Hybrid_Auth;  use Session;
 class UserController extends \BaseController {
 
 	public function index()
@@ -31,7 +31,11 @@ class UserController extends \BaseController {
             'email'    => 'required|email|unique:user',
             'login'    => 'required|min:5|unique:user',
             'password'    => 'required|min:8|confirmed',
-            'terms'    => 'required' 
+            'country'    => '',
+            'city'    => '',
+            'f_name'    => '',
+            'l_name'    => '',
+            'terms'    => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -47,11 +51,15 @@ class UserController extends \BaseController {
         $user = User::create(array('email' => Input::get('email'),
                             'login' => Input::get('login'),
                             'password' => Hash::make(Input::get('password')),
+                            'city' => Input::get('city',''),
+                            'country' => Input::get('country',''),
+                            'f_name' => Input::get('f_name',''),
+                            'l_name' => Input::get('l_name',''),
                             'role_id' => Role::where('name','=','user')->first()->id,
                             'confirmation_code' => $confirmation_code));
 
         Mail::queue('emails.auth.verify', array("confirmation_code" => $confirmation_code), function($message) {
-            $message->to(Input::get('email'), Input::get('username'))
+            $message->to(Input::get('email'), Input::get('login'))
                 ->subject('Verifiez votre adresse mail ');
         });
         $message = 'Félicitations ! Votre nouveau compte a été créé avec succès ! Merci de verifier votre email.';
@@ -61,14 +69,14 @@ class UserController extends \BaseController {
             'role_id' => Role::where('name','=','user')->first()->id
         );
         Auth::login($user, true);
-        return View::make("message", compact("message"));    
+        return View::make("message", compact("message"));
     }
 
 	public function doLogin()
 	{
 		$rules = array(
             'login'    => 'required',
-            'password' => 'required:' 
+            'password' => 'required:'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -85,7 +93,7 @@ class UserController extends \BaseController {
             'password' => Input::get('password')/*,
             'role_id' => Role::where('name','=','user')->first()->id*/
         );
-        if(Auth::attempt($userdata, Input::has("save_cnt"))) 
+        if(Auth::attempt($userdata, Input::has("save_cnt")))
         {
             return Redirect::intended('/');
         }
@@ -100,13 +108,13 @@ class UserController extends \BaseController {
     {
         Auth::logout();
         Session::flush();
-        $gauth=new Hybrid_auth(app_path().'/config/google_auth.php');
+        $gauth=new Hybrid_Auth(app_path().'/config/google_auth.php');
         $gauth->logoutAllProviders();
-        $fbauth=new Hybrid_auth(app_path().'/config/fb_auth.php');
+        $fbauth=new Hybrid_Auth(app_path().'/config/fb_auth.php');
         $fbauth->logoutAllProviders();
         return Redirect::to('login');
     }
-    
+
 	public function login()
 	{
 		if (Auth::check()) {
@@ -117,7 +125,7 @@ class UserController extends \BaseController {
 
 	public function show($id)
 	{
-		
+
 	}
 
 	public function edit()
@@ -147,7 +155,7 @@ class UserController extends \BaseController {
 			$messages = $validator->messages();
 		    return Redirect::back()->withErrors($messages)->withInput(Input::except('password'));
 		}
-		
+
 		$user->login = $login;
 		$user->l_name = $l_name;
 		$user->f_name = $f_name;

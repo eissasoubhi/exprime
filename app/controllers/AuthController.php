@@ -45,7 +45,14 @@ class AuthController extends \BaseController
         $oauth = new Hybrid_Auth(app_path(). '/config/fb_auth.php');
         $provider = $oauth->authenticate('Facebook');
         $profile = $provider->getUserProfile();
-        return var_dump($profile);
+
+        return App::make('frontend\UserController')->doSignUp(array('email' => $profile->email,
+                                                                    'login' => $profile->identifier,
+                                                                    'password' =>"pass123",
+                                                                    'city' => $profile->city,
+                                                                    'f_name' => $profile->firstName,
+                                                                    'l_name' => $profile->lastName,
+                                                                    'country' => $profile->country));
     }
 
     //this is the method that will handle the Google Login
