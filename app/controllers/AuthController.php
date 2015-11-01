@@ -46,13 +46,15 @@ class AuthController extends \BaseController
         $provider = $oauth->authenticate('Facebook');
         $profile = $provider->getUserProfile();
 
+        if ($user = User::where('email', '=', $profile->email)->first()) {
+            Auth::login($user, true);
+            return Redirect::intended('/');
+        }
         return App::make('frontend\UserController')->doSignUp(array('email' => $profile->email,
                                                                     'login' => $profile->identifier,
-                                                                    'password' =>"pass123",
-                                                                    'city' => $profile->city,
+                                                                    'password' =>"pass1234",
                                                                     'f_name' => $profile->firstName,
-                                                                    'l_name' => $profile->lastName,
-                                                                    'country' => $profile->country));
+                                                                    'l_name' => $profile->lastName));
     }
 
     //this is the method that will handle the Google Login
@@ -73,8 +75,15 @@ class AuthController extends \BaseController
         {
             return $e->getMessage();
         }
-
-        return dd($profile);
+        if ($user = User::where('email', '=', $profile->email)->first()) {
+            Auth::login($user, true);
+            return Redirect::intended('/');
+        }
+        return App::make('frontend\UserController')->doSignUp(array('email' => $profile->email,
+                                                                    'login' => $profile->identifier,
+                                                                    'password' =>"pass1234",
+                                                                    'f_name' => $profile->firstName,
+                                                                    'l_name' => $profile->lastName));
 
     }
 
