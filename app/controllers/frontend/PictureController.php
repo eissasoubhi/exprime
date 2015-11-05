@@ -9,7 +9,7 @@ class PictureController extends \BaseController {
 		Session::flash('jscroll_resources', '1');
 		Session::flash('freewall_resources', '1');
 		Session::flash('visible_resources', '1');
-        $pictures = Picture::simplePaginate(16);
+        $pictures = Picture::orderBy('updated_at', 'DESC')->simplePaginate(16);
 		return View::make('frontend.picture.index', compact('pictures'));
 	}
 
@@ -476,15 +476,56 @@ class PictureController extends \BaseController {
 			$where =substr($where,0,strrpos($where,"OR"));
 		}
 
-		$keywords = Keyword::whereRaw($where)->get();
+		$orm_keywords = Keyword::whereRaw($where)->get();
 
 		$pictures = array();
 
-		foreach ($keywords as $keyword) {
+		foreach ($orm_keywords as $keyword) {
 			foreach ($keyword->pictures()->get() as $picture ) {
 				isset($pictures[$picture->id]) or $pictures[$picture->id] = $picture; //remove duplicated obj
 			}
 		}
+		$matched_pics = array();
+		foreach (Picture::all() as $key => $pic) {
+			foreach ($keywords as $keyword) {
+				similar_text($pic->name(), $keyword, $match_proportion);
+				$orm_key_words = $pic->keywords;
+				// matched picture keywords
+				$matched_kw_proportion = 0;
+				foreach ($orm_key_words as $kw) {
+					similar_text($kw->keyword, $keyword, $kw_match_proportion);
+					if ($kw_match_proportion >= 20) {
+						if ($kw_match_proportion > $matched_kw_proportion) {
+							$matched_kw_proportion = $kw_match_proportion;
+						}
+					}
+				}
+				// get the biggest proportion for current picture
+				if ($matched_kw_proportion > $match_proportion) {
+					$match_proportion = $matched_kw_proportion;
+				}
+				if ($match_proportion >= 20) {
+					//if picture isnot set in pictures and (isnot set in matched_pics or its $match_proportion bigger than the old's)
+					if (!isset($pictures[$pic->id]) and (
+						!isset($matched_pics[$pic->id]) or (
+							isset($matched_pics[$pic->id]) and $match_proportion > $matched_pics[$pic->id]))) {
+						$matched_pics[$pic->id] = $match_proportion;
+					}
+				}
+			}
+		}
+		arsort($matched_pics);
+		;
+		foreach ($matched_pics as $pic_id => $pic_proportion) {
+			$pictures[$pic_id] = Picture::find($pic_id);
+		}
+		foreach ($pictures as $key => $pic) {
+			echo $pic->name;
+			echo "<br>";
+			var_dump($pic->keywords[0]->keyword);
+			echo "<hr>";
+		}
+		return;
 		$perPage = 16;
 		$currentPage = Input::get('page') - 1;
 		$pagedData = array_slice($pictures, $currentPage * $perPage, $perPage);

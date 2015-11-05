@@ -115,10 +115,10 @@ $(document).ready(function() {
 
             getImageUrl(file);
             imgUploading();
-            var host = +document.location.hostname;
+            /*var host = document.location.hostname;
             var local = 'http://localhost:8000';
-            var root = (host === "localhost") ? local : host;
-            $(".img-btn-upload").upload(root+"/tempup",function  (targetFile) {
+            var root = (host === "localhost") ? local : host;*/
+            $(".img-btn-upload").upload("/tempup",function  (targetFile) {
               imgUploaded();
               $('.table-cell img').attr({
                 src: targetFile,
