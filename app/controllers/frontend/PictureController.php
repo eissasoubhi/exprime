@@ -9,7 +9,7 @@ class PictureController extends \BaseController {
 		Session::flash('jscroll_resources', '1');
 		Session::flash('freewall_resources', '1');
 		Session::flash('visible_resources', '1');
-        $pictures = Picture::orderBy('updated_at', 'DESC')->simplePaginate(16);
+        $pictures = Picture::orderBy('created_at', 'DESC')->simplePaginate(16);
 		return View::make('frontend.picture.index', compact('pictures'));
 	}
 
@@ -23,10 +23,17 @@ class PictureController extends \BaseController {
 	public function keywords()
 	{
 		 // header("Access-Control-Allow-Origin: *");
+
 		$keywords =  Keyword::all();
+		$pictures =  Picture::all();
 		$keywords_name = array();
-		foreach ($keywords as $kw) {
+		foreach ($keywords as $kw)
+		{
 			$keywords_name[] = $kw->keyword;
+		};
+		foreach ($pictures as $pic)
+		{
+			$keywords_name[] = $pic->name();
 		}
 		return $keywords_name;
 	}
@@ -462,49 +469,44 @@ class PictureController extends \BaseController {
 		$searched_words = Input::get("q");
 		// return $keywords;
 		$keywords = array_unique(explode(" ", $searched_words));
-		$where = "";
+		$keywords_array = array();
 		foreach ($keywords as $keyword)
 		{
 			$keyword = trim($keyword);
-			if ($keyword) {
-				$where .= " keyword like '%$keyword%' OR";
+			if ($keyword && !in_array($keyword, $keywords_array))
+			{
+				$keywords_array[] = $keyword;
 			}
 		}
-		$where = trim($where);
-
-		if (strrpos($where,"OR") + strlen("OR") == strlen($where)) {
-			$where =substr($where,0,strrpos($where,"OR"));
-		}
-
-		$orm_keywords = Keyword::whereRaw($where)->get();
 
 		$pictures = array();
-
-		foreach ($orm_keywords as $keyword) {
-			foreach ($keyword->pictures()->get() as $picture ) {
-				isset($pictures[$picture->id]) or $pictures[$picture->id] = $picture; //remove duplicated obj
-			}
-		}
 		$matched_pics = array();
-		foreach (Picture::all() as $key => $pic) {
-			foreach ($keywords as $keyword) {
+		foreach (Picture::all() as $key => $pic)
+		{
+			foreach ($keywords_array as $keyword)
+			{
 				similar_text($pic->name(), $keyword, $match_proportion);
 				$orm_key_words = $pic->keywords;
 				// matched picture keywords
 				$matched_kw_proportion = 0;
-				foreach ($orm_key_words as $kw) {
+				foreach ($orm_key_words as $kw)
+				{
 					similar_text($kw->keyword, $keyword, $kw_match_proportion);
-					if ($kw_match_proportion >= 20) {
-						if ($kw_match_proportion > $matched_kw_proportion) {
+					if ($kw_match_proportion >= 40)
+					{
+						if ($kw_match_proportion > $matched_kw_proportion)
+						{
 							$matched_kw_proportion = $kw_match_proportion;
 						}
 					}
 				}
 				// get the biggest proportion for current picture
-				if ($matched_kw_proportion > $match_proportion) {
+				if ($matched_kw_proportion > $match_proportion)
+				{
 					$match_proportion = $matched_kw_proportion;
 				}
-				if ($match_proportion >= 20) {
+				if ($match_proportion >= 40)
+				{
 					//if picture isnot set in pictures and (isnot set in matched_pics or its $match_proportion bigger than the old's)
 					if (!isset($pictures[$pic->id]) and (
 						!isset($matched_pics[$pic->id]) or (
@@ -515,17 +517,17 @@ class PictureController extends \BaseController {
 			}
 		}
 		arsort($matched_pics);
-		;
+
 		foreach ($matched_pics as $pic_id => $pic_proportion) {
 			$pictures[$pic_id] = Picture::find($pic_id);
 		}
-		foreach ($pictures as $key => $pic) {
-			echo $pic->name;
-			echo "<br>";
-			var_dump($pic->keywords[0]->keyword);
-			echo "<hr>";
-		}
-		return;
+		// foreach ($pictures as $key => $pic) {
+		// 	echo $pic->name;
+		// 	echo "<br>";
+		// 	var_dump($pic->keywords[0]->keyword);
+		// 	echo "<hr>";
+		// }
+		// return;
 		$perPage = 16;
 		$currentPage = Input::get('page') - 1;
 		$pagedData = array_slice($pictures, $currentPage * $perPage, $perPage);
