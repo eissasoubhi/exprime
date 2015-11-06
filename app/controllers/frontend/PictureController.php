@@ -148,10 +148,11 @@ class PictureController extends \BaseController {
 	{
 		$image = Picture::find($id);
 		$picture_keywords = array();
-		foreach ($image->keywords as $key => $kw) {
+		foreach ($image->keywords as $key => $kw)
+		{
 			$picture_keywords[] = $kw->keyword;
 		}
-		// return dd($image->comments()->get()[0]);
+		// return dd($picture->comments()->get()[0]);
 		$keywords = implode(",", $picture_keywords);
 		return View::make('frontend.picture.show',compact('image','keywords'));
 	}
@@ -481,6 +482,7 @@ class PictureController extends \BaseController {
 
 		$pictures = array();
 		$matched_pics = array();
+		$matched_comments_pics = array();
 		foreach (Picture::all() as $key => $pic)
 		{
 			foreach ($keywords_array as $keyword)
@@ -492,7 +494,7 @@ class PictureController extends \BaseController {
 				foreach ($orm_key_words as $kw)
 				{
 					similar_text($kw->keyword, $keyword, $kw_match_proportion);
-					if ($kw_match_proportion >= 40)
+					if ($kw_match_proportion >= 50)
 					{
 						if ($kw_match_proportion > $matched_kw_proportion)
 						{
@@ -505,7 +507,16 @@ class PictureController extends \BaseController {
 				{
 					$match_proportion = $matched_kw_proportion;
 				}
-				if ($match_proportion >= 40)
+				$orm_comments = $pic->comments()->get();
+				// matched picture comments
+				foreach ($orm_comments as $comment)
+				{
+					if (str_contains($comment->content, $keyword))
+					{
+						$matched_comments_pics[$pic->id] = $pic;
+					}
+				}
+				if ($match_proportion >= 50)
 				{
 					//if picture isnot set in pictures and (isnot set in matched_pics or its $match_proportion bigger than the old's)
 					if (!isset($pictures[$pic->id]) and (
@@ -516,15 +527,25 @@ class PictureController extends \BaseController {
 				}
 			}
 		}
+		// return;
 		arsort($matched_pics);
 
 		foreach ($matched_pics as $pic_id => $pic_proportion) {
 			$pictures[$pic_id] = Picture::find($pic_id);
 		}
+		$pictures = array_merge($pictures, $matched_comments_pics);
 		// foreach ($pictures as $key => $pic) {
 		// 	echo $pic->name;
 		// 	echo "<br>";
-		// 	var_dump($pic->keywords[0]->keyword);
+		// 	foreach ($pic->keywords as $key => $keyword) {
+		// 		echo $keyword;
+		// 		echo "<br>";
+		// 	}
+		// 	echo "<br>";
+		// 	foreach ($pic->comments as $key => $comment) {
+		// 		echo $comment;
+		// 		echo "<br>";
+		// 	}
 		// 	echo "<hr>";
 		// }
 		// return;
