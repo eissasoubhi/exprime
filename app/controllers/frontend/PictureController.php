@@ -1,7 +1,7 @@
 <?php
 namespace frontend;
 use View; use Picture; use Input; use Redirect; use Validator; use Session; use Auth; use Hash; use Resize;
-use File; use Keyword; use PictureKeyword; use Route; use Error; use Request; use Like; use Paginator;
+use File; use Keyword; use PictureKeyword; use Route; use Error; use Request; use Like; use Paginator; use Response;
 class PictureController extends \BaseController {
 
 	public function index()
@@ -530,25 +530,15 @@ class PictureController extends \BaseController {
 		// return;
 		arsort($matched_pics);
 
-		foreach ($matched_pics as $pic_id => $pic_proportion) {
-			$pictures[$pic_id] = Picture::find($pic_id);
+		foreach ($matched_pics as $pic_id => $pic_proportion)
+		{
+			if (!isset($matched_comments_pics[$pic_id]))
+			{
+				$pictures[$pic_id] = Picture::find($pic_id);
+			}
 		}
 		$pictures = array_merge($pictures, $matched_comments_pics);
-		// foreach ($pictures as $key => $pic) {
-		// 	echo $pic->name;
-		// 	echo "<br>";
-		// 	foreach ($pic->keywords as $key => $keyword) {
-		// 		echo $keyword;
-		// 		echo "<br>";
-		// 	}
-		// 	echo "<br>";
-		// 	foreach ($pic->comments as $key => $comment) {
-		// 		echo $comment;
-		// 		echo "<br>";
-		// 	}
-		// 	echo "<hr>";
-		// }
-		// return;
+
 		$perPage = 16;
 		$currentPage = Input::get('page') - 1;
 		$pagedData = array_slice($pictures, $currentPage * $perPage, $perPage);
@@ -558,5 +548,14 @@ class PictureController extends \BaseController {
 		Session::flash('visible_resources', '1');
 		$pictures->appends('q',$searched_words);
 		return View::make('frontend.picture.index', compact('pictures', 'searched_words'));
+	}
+
+	public function download($name)
+	{
+		$picture_file = public_path()."/content/".$name;
+		$extension = File::extension($picture_file);
+		$headers = array('Content-Cype : image/'.$extension);
+
+		return Response::download($picture_file, $name, $headers);
 	}
 }

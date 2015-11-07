@@ -254,26 +254,46 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
      event.stopPropagation();
      // window.open($(this).attr('data-href'), '_blank');
    });
-   $('.edit-comment').click(function(event) {
+
+   function undo_edit_comment () {
+       event.preventDefault();
+       $comment = $(this).parents('.row.comment');
+       $form = $comment.find('.form-control');
+       // alert($.trim($form.data('text').replace(/\n/g,"<br>")) )
+       content_text = $.trim($form.data('text').replace(/\n/g,"<br>").replace(/^<br\s*\/?>|<br\s*\/?>$/g,'')); // remove white space and rplace newlines to br tag and remove first and last br
+       $form.replaceWith('<div class="panel-body">'+ content_text +'</div>');
+       $edit_btn = $comment.find('button.update-comment');
+       $edit_btn.addClass('edit-comment btn-warning').removeClass('update-comment btn-success').find('.fa-check').removeClass('fa-check').addClass('fa-edit');
+       $edit_btn.click(edit_comment);
+       $(this).remove();
+   }
+    // $('.undo-edit-comment').click(undo_edit_comment);
+    function edit_comment(event) {
     event.preventDefault();
      $comment = $(this).parents('.row.comment');
      $content = $comment.find('.panel-body');
-       $form = $(this).closest('form');
-     $textarea = $('<textarea form="'+ $form.attr('id') +'" class="form-control" name="updateComment" id="updateComment" rows="2"></textarea>');
+     $form = $(this).closest('form');
+     $textarea = $('<textarea form="'+ $form.attr('id') +'" class="form-control " name="updateComment" id="updateComment" rows="4"></textarea>');
+     $textarea.data('text', $content.text());
      $content.replaceWith($textarea.text($.trim($content.text())));
      $textarea.focus();
-     $(this).removeClass('edit-comment btn-warning').addClass('update-comment btn-success');
+     $(this).removeClass('edit-comment btn-warning').addClass('update-comment btn-success').find('.fa-edit').removeClass('fa-edit').addClass('fa-check');
+     $undo_btn = $('<button type="button" class="btn btn-warning undo-edit-comment"></button>').append($('<i class="fa fa-undo"> </i>'));
+     $undo_btn.click(undo_edit_comment);
+     $undo_btn.insertBefore($comment.find('form.delete-comment'));
      $(this).off('click');
-   });
+   };
 
+   $('.edit-comment').click(edit_comment);
    $('.img-like-btn').click(function(event) {
     var like_btn = this;
+    $(like_btn).html('<i class="fa fa-refresh fa-spin"></i>');
      $.ajax({
        url: $(this).attr('data-img-like'),
        type: 'GET'
      })
      .done(function(result) {
-      console.log(result);
+      // console.log(result);
        if (result.state == "liked") {
           $(like_btn).html(result.count+' <i class="fa fa-heart"></i>');
        } else if(result.state == "unliked"){
@@ -283,8 +303,27 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
      .fail(function() {
        console.log("like error file:default.js");
      })
-
    })
+
+    $('.img-like-btn-text').click(function(event) {
+    var like_btn = this;
+    $(like_btn).html('<i class="fa fa-refresh fa-spin"></i>');
+     $.ajax({
+       url: $(this).attr('data-img-like'),
+       type: 'GET'
+     })
+     .done(function(result) {
+       if (result.state == "liked") {
+          $(like_btn).html('<i class="fa fa-heart"></i> Enlever des favoris');
+       } else if(result.state == "unliked"){
+          $(like_btn).html('<i class="fa fa-heart-o"></i> Ajouter aux favoris');
+       };
+     })
+     .fail(function() {
+       console.log("like error file:default.js");
+     })
+    })
+
    $('.show-wait').click(function(event) {
      event.preventDefault();
      var wait_btn = $(this).attr('data-wait');
@@ -310,4 +349,10 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
        console.log("show-wait error file:default.js");
      })
    });
+   /********** delete confirmation modal *********/
+   $('form input[name="_method"][type="hidden"][value="DELETE"] ~ button[type="submit"]:not(\'.delete-modal-submit\')').click(function(event) {
+    event.preventDefault();
+    $('#delete-modal form.commit-delete').attr('action',$(this).parent('form').attr('action'));
+    $('#delete-modal').modal();
+   });;
 });

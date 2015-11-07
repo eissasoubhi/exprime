@@ -37,7 +37,7 @@ class CommentController extends \BaseController {
         }
 
         return Redirect::back();
-        
+
     }
     public function update($id)
     {
@@ -48,6 +48,6 @@ class CommentController extends \BaseController {
         $comment->save();
 
         return Redirect::back();
-        
+
     }
 }

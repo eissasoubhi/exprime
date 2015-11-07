@@ -102,7 +102,7 @@ class UserController extends \BaseController {
         );
         if(Auth::attempt($userdata, Input::has("save_cnt")))
         {
-            return Redirect::intended('/');
+            return Redirect::intended(Input::get('next', '/'));
         }
         else
         {

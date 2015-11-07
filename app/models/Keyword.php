@@ -23,7 +23,4 @@ class Keyword extends Eloquent    {
     {
         return $this->belongsTo('User');
     }
-
-
-
 }

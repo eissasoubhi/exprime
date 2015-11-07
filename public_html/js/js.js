@@ -38,12 +38,12 @@ var images = wall.container.find('.brick');
 				html += temp.replace(/\{height\}/g, 200).replace(/\{width\}/g, w).replace("{index}", i + 1);
 			}
 			$("#container").html(html);
-			
+
 			var wall = new freewall("#container");
 			wall.reset({
 				selector: '.brick',
 				animate: true,
-				
+
 				onResize: function() {
 					wall.fitWidth();
 				}
@@ -65,3 +65,16 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
 }, function() {
 	$(this).parent().parent().children(".img").children(".view-hover").css("opacity","1").removeClass('img-show')
 });
+
+/********** delete confirmation modal *********/
+   $('form input[name="_method"][type="hidden"][value="DELETE"] ~ button[type="submit"]').click(function(event) {
+    var x = confirm("êtes vous sûre de voiloire supprimer?");
+                    if (x) {
+                        return true;
+                    }
+                    else {
+
+                        event.preventDefault();
+                        return false;
+                    }
+   });;

@@ -30,12 +30,14 @@
                                             <div class="clear"></div>
                                         </div>
                                         <div class="hover-btns">
-                                            <a href="#" title="">
+                                            <a href="{{url('img/download/'.$picture->name)}}" title="{{$picture->name}}">
                                                 <i class="fa fa-download"></i>
                                             </a>
-                                            <a target="_blank" href="{{url('img/edit/'.$picture->id)}}" title="">
-                                                <i class="fa fa-pencil-square-o"></i>
-                                            </a>
+                                            @if(Auth::check())
+                                                <a href="{{url('img/edit/'.$picture->id)}}" title="{{$picture->name}}">
+                                                    <i class="fa fa-pencil-square-o"></i>
+                                                </a>
+                                            @endif
                                             @if(Auth::check())
                                                 <a target="_blank" class="img-like-btn" data-img-like="{{url('img/toggleLike/'.$picture->id)}}" title="">
                                                     @if($picture->has('likes'))
@@ -43,11 +45,15 @@
                                                     @else
                                                         0
                                                     @endif
-                                                     <i class="fa fa-heart-o"></i>
+                                                    @if(Auth::check() && $picture->isLiked(Auth::user()->id))
+                                                        <i class="fa fa-heart"></i>
+                                                    @else
+                                                        <i class="fa fa-heart-o"></i>
+                                                    @endif
                                                 </a>
                                             @endif
 
-                                            <a href="{{url('img/show/'.$picture->id)}}" title="">
+                                            <a href="{{url('img/show/'.$picture->id.'/'.($picture->name() ? $picture->name() : $picture->firstKeyWord))}}" title="">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <div class="clear"></div>
@@ -56,7 +62,7 @@
 
                                     <div  class="img" style="background-image: url({{url('content/'.$picture->url_origin)}})">
                                         <div class="view-hover">
-                                            <img  src="{{url('content/'.$picture->url_origin)}}" alt="">
+                                            <img  src="{{url('content/'.$picture->url_origin.'?'.(!$picture->name() ? $picture->firstKeyWord : ($picture->firstKeyWord ? $picture->firstKeyWord : $picture->name() )))}}" alt="{{$picture->name() ? $picture->name() : $picture->firstKeyWord}}">
                                             <div class="title">
                                                 {{$picture->name}}
                                             </div>

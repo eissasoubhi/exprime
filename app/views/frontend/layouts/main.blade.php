@@ -59,7 +59,8 @@
 	<div class="container page">
  		@yield('content')
  	</div>
- 	@include('frontend.partials.footer')
+    @include('frontend.partials.footer')
+ 	@include('frontend.partials.modal')
  	<div id="overly"><i class="fa fa-refresh fa-spin"></i></div>
     {{ HTML::script('js/default.js'); }}
     {{ HTML::script('libs/bootstrap-tagsinput/bootstrap-tagsinput.js'); }}

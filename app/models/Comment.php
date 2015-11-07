@@ -10,4 +10,8 @@ class Comment extends Eloquent    {
 		return $this->belongsTo('user');
 	}
 
+    public function belongsToUser(User $user)
+    {
+        return $this->user_id == $user->id;
+    }
 }

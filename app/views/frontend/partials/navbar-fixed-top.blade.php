@@ -17,7 +17,7 @@
                 <li><a href="{{url('page/about')}}">À PROPOS</a></li>
                 <li><a href="{{url('explorer')}}">EXPLORER</a></li>
                 <li><a href="{{url('contact')}}">CONTACT</a></li>
-                
+
               </ul>
                 {{ Form::open(array('url' => 'img/search', 'class' => 'navbar-form navbar-left search', 'role' => 'search', 'method' => 'GET')) }}
 		            <div class="form-group">
@@ -25,7 +25,7 @@
 		                    <span class="input-group-btn">
 		                        <button type="submit" class="btn btn-default " ><i class="fa fa-search"></i></button>
 		                    </span>
-		                    
+
 		                    <input data-role="keyword-search" type="text" class="keyword-search form-control span6" placeholder="Recherche par mot clés..." name="q" value="{{$searched_words or ''}}">
 		                    <!-- <span class="input-group-btn">
                             <select class="search_options" multiple="multiple">
@@ -36,16 +36,16 @@
                             </select>
                         </span> -->
 		                </div><!-- /input-group -->
-		            </div>       
-              {{ Form::close() }} 
+		            </div>
+              {{ Form::close() }}
               <ul class="nav navbar-nav navbar-right">
-                <li class="highlighted" ><a href="{{url('upload')}}"><i class="fa fa-upload"></i> Uploder</a></li>
                 @if(!Auth::check())
                     <li ><a href="{{url('login')}}"><i class="fa fa-sign-in"></i> Se connecter</a></li>
                     <li ><a href="{{url('sign-up')}}"><i class="fa fa-user-plus"></i> S'inscrire</a></li>
                 @else
+                    <li class="highlighted" ><a href="{{url('upload')}}"><i class="fa fa-upload"></i> Uploder</a></li>
                     <li class="dropdown">
-                      <?php 
+                      <?php
                         if(Auth::user()->f_name && Auth::user()->l_name)
                         {
                           $user_name = ucfirst(Auth::user()->l_name[0]).".".ucfirst(str_limit(Auth::user()->f_name, 10 ,""));
@@ -62,7 +62,7 @@
                         <li role="separator" class="divider"></li>
                         <li><a href="{{url('logout')}}"><i class="fa fa-sign-out"></i> Se déconnecter</a></li>
                       </ul>
-                    </li>             
+                    </li>
                 @endif
               </ul>
               {{ Form::open(array('url' => 'img/search', 'class' => 'navbar-form navbar-left hidden-search', 'role' => 'search', 'method' => 'GET')) }}
@@ -71,7 +71,7 @@
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default " ><i class="fa fa-search"></i></button>
                         </span>
-                        
+
                         <input data-role="keyword-search" type="text" class="keyword-search form-control span6" placeholder="Recherche par mot clés..." name="q" value="{{$searched_words or ''}}">
                         <!-- <span class="input-group-btn">
                             <select class="search_options" multiple="multiple">
@@ -82,8 +82,8 @@
                             </select>
                         </span> -->
                     </div><!-- /input-group -->
-                </div>       
-              {{ Form::close() }} 
+                </div>
+              {{ Form::close() }}
             </div>
         </div>
     </nav>

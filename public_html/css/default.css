@@ -17,7 +17,7 @@ body{
 	background: #EEA48A;
 }
 .slider {
-	background: url(../img/s1.jpg) no-repeat center ; 
+	background: url(../img/s1.jpg) no-repeat center ;
 	background-size: cover;
 	-moz-background-size: cover;
 	-webkit-background-size: cover;
@@ -107,7 +107,7 @@ h2 span{
 	margin: 0;
 	border-radius: 0;
 	min-height: initial;
-	
+
 }
 .navbar-fixed-top{
 	box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.4);
@@ -115,7 +115,7 @@ h2 span{
 .page{
 	min-height: 600px;
 	/*padding: 0;*/
-	
+
 }
 .content.container{
 	padding-top: 15px;
@@ -264,7 +264,7 @@ body .footer ul a{
 	-webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
 	-moz-transition: all 0.5s ease;/* Firefox 4-15 */
 	-o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
-	transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */	
+	transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
 }
 .brick:hover .img-close{
 	top: 0;
@@ -386,13 +386,13 @@ h1{
 .sn-login .sn-fb{
 	background-color: #2A68D1;
 }
-.sn-login .sn-google:hover{	
+.sn-login .sn-google:hover{
 	background-color: #e95325;
 }
 .sn-login .sn-fb:hover{
 	background-color: #477eda;
 }
-.sn-login .sn-google{	
+.sn-login .sn-google{
 	background-color: #D34215;
 }
 .sn-login .or {
@@ -478,7 +478,7 @@ a.sign-in, a.register, a.editpass, .disabled-a{
   min-height: 350px;
   margin: 20px 0;
   overflow: hidden;
-  background-color: #BEB9B3;	
+  background-color: #BEB9B3;
   border: 2px solid #A6A19B;
 	text-align: center;
 	vertical-align: middle;
@@ -523,9 +523,9 @@ body .avpw_canvas_background {
   background: #AEA79F;
 }
 body .avpw_tool_icon_inner,
-body .avpw_dropdown_icon_inner, 
-body .avpw_plus_icon, 
-body .avpw_history_icon, 
+body .avpw_dropdown_icon_inner,
+body .avpw_plus_icon,
+body .avpw_history_icon,
 body .avpw_arrow_icon,
 body .avpw_lock_icon,
 body .avpw_brush_size,
@@ -729,7 +729,8 @@ button.btn-upload{
 }
 .panel>.panel-heading:after,.panel>.panel-heading:before{
 	position:absolute;
-	top:11px;left:-16px;
+	top:11px;
+    left:-15px;
 	right:100%;
 	width:0;
 	height:0;
@@ -750,7 +751,7 @@ button.btn-upload{
 	border-width:8px;
 }
 .user-photo .fa-user{
-	font-size: 3vw; 
+	font-size: 3vw;
 }
 
 .comments-title{
@@ -775,4 +776,18 @@ span.msg-wait{
 }
 form.navbar-form.navbar-left.search{
 	margin: 0;
+}
+form.commit-delete{
+    display: inline-block;
+}
+.hidden-search span.twitter-typeahead, .hidden-search input.keyword-search {
+    width: 100%!important
+}
+::-moz-selection {
+    color: #FFF;
+    background: #dd4814;
+}
+::selection{
+    color: #FFF;
+    background: #dd4814;
 }

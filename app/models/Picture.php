@@ -7,7 +7,7 @@ class Picture extends Eloquent    {
 
 	public function user()
 	{
-		return $this->belongsToUser('User');
+		return $this->belongsTo('User');
 	}
 
     public function clipedName()
@@ -82,4 +82,10 @@ class Picture extends Eloquent    {
     {
         return $this->user_id == $user->id;
     }
+
+    public function getFirstKeywordAttribute()
+    {
+        return (!$this->keywords->isEmpty()) ? $this->keywords->first()->keyword : "";
+    }
 }
+
