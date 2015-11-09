@@ -12,15 +12,17 @@
                         @endif
                           <a href="{{url('img/download/'.$image->name)}}" class="btn btn-default"><i class="fa fa-download"> Téléchargez </i></a>
                           <a class="btn btn-default" data-toggle="modal" data-target="#picture-link" data-link="{{url('content/'.$image->name)}}"><i class="fa fa-link"> Lien</i></a>
-                          <a class="btn btn-default img-like-btn-text" data-img-like="{{url('img/toggleLike/'.$image->id)}}">
-                                @if(Auth::check() && $image->isLiked(Auth::user()->id))
-                                    <i class="fa fa-heart"></i>
-                                    Enlever des favoris
-                                @else
-                                    <i class="fa fa-heart-o"></i>
-                                    Ajouter aux favoris
-                                @endif
-                          </a>
+                          @if(Auth::check())
+                              <a class="btn btn-default img-like-btn-text" data-img-like="{{url('img/toggleLike/'.$image->id)}}">
+                                    @if(Auth::check() && $image->isLiked(Auth::user()->id))
+                                        <i class="fa fa-heart"></i>
+                                        Enlever des favoris
+                                    @else
+                                        <i class="fa fa-heart-o"></i>
+                                        Ajouter aux favoris
+                                    @endif
+                              </a>
+                          @endif
                       </div>
                       </div>
                   </div>
