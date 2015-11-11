@@ -306,10 +306,11 @@ class PictureController extends \BaseController {
 			}
 			$image->keywords()->sync($keyword_ids);
 			$picCount = Picture::where('id','<=',$image->id)->count();
-			$page = ceil($picCount/16);
+			$all_pics_count = Picture::all()->count();
+			$page = ( ceil($all_pics_count/16) - ceil($picCount/16)) + 1; //16 = nb pic per page
 			$param = ($page !=0 && $page != 1) ? "?page=".$page : "" ;
 			// return "id : ".$image->id.", count : ".$picCount.", floor : ".$page;
-			// return "explorer".$param;
+			// return "explorer ".$picCount;
 			// dd($full_name);
 			return Redirect::to("explorer".$param)->with("new_added_pic_id", $image->id);
 		}
@@ -323,7 +324,7 @@ class PictureController extends \BaseController {
 			$errors[] = "Erreur de suppresssion de l'image de la base de données !";
 			return Redirect::back()->withErrors($errors);
 		}
-		$filename = public_path()."/content/".$picture->url_origin;
+		$filename = public_path()."/content/cdrom/abs(number)".$picture->url_origin;
 
 		if (File::exists($filename)) {
 			if (!File::delete($filename))
@@ -360,7 +361,7 @@ class PictureController extends \BaseController {
 			$fileTypes = array('jpg','jpeg','png'); // File extensions
 
 			$extension = Input::file('Filedata')->getClientOriginalExtension();
-
+			$response = array();
 			if (in_array($extension, $fileTypes)) {
 
 				$name = Input::file('Filedata')->getClientOriginalName();
@@ -390,7 +391,10 @@ class PictureController extends \BaseController {
 				{
 					$messages = $validator->messages();
 
-				    return "erreur d'insertion de la photo $name !";
+					$response['state'] = "error";
+					$response['msg'] = $messages;
+
+				    return $response;
 				}
 
 				Input::file('Filedata')->move($targetPath, $full_name);
@@ -418,10 +422,14 @@ class PictureController extends \BaseController {
 									'timestamp' => Input::get('timestamp'),
 									'token' => Input::get('token'));
 				// return  '1';
-				return  url(rtrim($targetFolder,'/') . '/' . $full_name);
+				$response['state'] = "success";
+				$response['targetFile'] = url(rtrim($targetFolder,'/') . '/' . $full_name);
+
 			} else {
-				return  'Invalid file type.';
+				$response['state'] = "error";
+				$response['msg'] = "Type de l'image invalide.";
 			}
+			return  $response;
 		// }
 	}
 

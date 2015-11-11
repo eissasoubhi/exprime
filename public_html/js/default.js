@@ -118,12 +118,21 @@ $(document).ready(function() {
             /*var host = document.location.hostname;
             var local = 'http://localhost:8000';
             var root = (host === "localhost") ? local : host;*/
-            $(".img-btn-upload").upload("/tempup",function  (targetFile) {
-              imgUploaded();
-              $('.table-cell img').attr({
-                src: targetFile,
-                id: $.now()
-              });
+
+            $(".img-btn-upload").upload("/tempup",function  (response) {
+                imgUploaded();
+                if (response.state == "success")
+                    {
+                      $('.table-cell img').attr({
+                        src: response.targetFile,
+                        id: $.now()
+                      });
+                    }
+                    else
+                    {
+                        imgZoneEmpty();
+                    };
+
             },function  (progress, value) {
                 $(".img-progress .progress-bar").attr('aria-valuenow', value).css('width', value+"%").text(value+"%");
             })
@@ -154,6 +163,7 @@ $(document).ready(function() {
                 imgZoneEmpty();
               return false;
             });
+            console.log(img)
         });
        wow = new WOW(
       {
