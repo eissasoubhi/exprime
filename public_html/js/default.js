@@ -131,6 +131,12 @@ $(document).ready(function() {
                     else
                     {
                         imgZoneEmpty();
+                        // console.log(response.msg)
+                        for (var index in response.msg)
+                        {
+                            $('.alert-danger.up-error').html("<p>"+ response.msg[index] +"</p>");
+                        }
+
                     };
 
             },function  (progress, value) {
