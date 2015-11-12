@@ -5,6 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{$title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="un site Web permet aux utilisateurs de trouver images Memes qui pourraient être utilisés dans les commentaires Facebook pour être plus expressifs, et ils peuvent également créer leurs propres Memes | a website allows users to find memes pictures that could be used in facebook comments to be more expressive, and they can also create their own memes " />
+    <meta name="keywords" content="générateur de Memes mobile support, télécharger vos propres images pour faire des Memes personnalisés " />
+    <!-- <link rel="shortcut icon" href="icons/favicon.ico" /> -->
+    <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="../icons/favicon.ico" /><![endif]-->
+    <link rel="apple-touch-icon" sizes="57x57" href="{url('icons/apple-touch-icon-57x57.png')}" />
+    <link rel="apple-touch-icon" sizes="114x114" href="{url('icons/apple-touch-icon-114x114.png')}" />
+    <link rel="apple-touch-icon" sizes="72x72" href="{url('icons/apple-touch-icon-72x72.png')}" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{url('icons/apple-touch-icon-144x144.png')}" />
+    <link rel="apple-touch-icon" sizes="60x60" href="{url('icons/apple-touch-icon-60x60.png')}" />
+    <link rel="apple-touch-icon" sizes="120x120" href="{url('icons/apple-touch-icon-120x120.png')}" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{url('icons/apple-touch-icon-76x76.png')}" />
+    <link rel="apple-touch-icon" sizes="152x152" href="{url('icons/apple-touch-icon-152x152.png')}" />
+    <link rel="icon" type="image/png" href="{url('icons/favicon-196x196.png" sizes="196x196')}" />
+    <link rel="icon" type="image/png" href="{url('icons/favicon-160x160.png" sizes="160x160')}" />
+    <link rel="icon" type="image/png" href="{url('icons/favicon-96x96.png" sizes="96x96')}" />
+    <link rel="icon" type="image/png" href="{url('icons/favicon-32x32.png" sizes="32x32')}" />
+    <link rel="icon" type="image/png" href="{url('icons/favicon-16x16.png" sizes="16x16')}" />
+    <meta name="msapplication-TileColor" content="#01BDF2" />
+    <meta name="msapplication-TileImage" content="{url('icons/mstile-144x144.png')}" />
+
     <link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates|Montserrat' rel='stylesheet' type='text/css'>
 	{{ HTML::style('libs/font-awesome-4.3.0/css/font-awesome.min.css'); }}
 	{{ HTML::style('libs/bootstrap-3.2.0/css/bootstrap.css'); }}
