@@ -372,6 +372,23 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
     $('#delete-modal').modal();
    });;
 
+   var deviceAgent = navigator.userAgent.toLowerCase();
+
+    var isTouchDevice = Modernizr.touch ||
+    (deviceAgent.match(/(iphone|ipod|ipad)/) ||
+    deviceAgent.match(/(android)/)  ||
+    deviceAgent.match(/(iemobile)/) ||
+    deviceAgent.match(/iphone/i) ||
+    deviceAgent.match(/ipad/i) ||
+    deviceAgent.match(/ipod/i) ||
+    deviceAgent.match(/blackberry/i) ||
+    deviceAgent.match(/bada/i));
+
+    if (isTouchDevice)
+    {
+        $('html').addClass('touch');
+    }
+
     $('button.picture-options-toggle').click(function(event) {
         // alert($('.brick:hover .hover-btns').css('bottom'));
         if ($('.brick:hover .hover-btns').css('bottom') == '0px' || $('.brick:hover .img-close').css('top') == '0px')
