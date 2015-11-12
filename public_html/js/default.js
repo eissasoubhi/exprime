@@ -371,4 +371,21 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
     $('#delete-modal form.commit-delete').attr('action',$(this).parent('form').attr('action'));
     $('#delete-modal').modal();
    });;
+
+    $('button.picture-options-toggle').click(function(event) {
+        // alert($('.brick:hover .hover-btns').css('bottom'));
+        if ($('.brick:hover .hover-btns').css('bottom') == '0px' || $('.brick:hover .img-close').css('top') == '0px')
+        {   // options hidden
+            $('.brick:hover .hover-btns').css('bottom', '-30px');
+            $('.brick:hover .img-close').css('top', '-30px');
+            $(this).removeClass('times').addClass('bars')
+        }
+        else
+            {   // options visible
+            $('.brick:hover .hover-btns').css('bottom', '0');
+            $('.brick:hover .img-close').css('top', '0');
+            $(this).addClass('times').removeClass('bars')
+        };
+    });
+
 });

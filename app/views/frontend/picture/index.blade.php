@@ -19,11 +19,15 @@
                                  ?>
                                 <div data-href="" class="brick {{$picture->id}} {{$class}} " {{$attr}}>
                                     <div class="overflow">
+                                        <button class="picture-options-toggle bars">
+                                            <i class="fa fa-bars"></i>
+                                            <i class="fa fa-times"></i>
+                                        </button>
                                         <div class="img-close" >
                                             @if(Auth::check() and ($picture->belongsToUser(Auth::user()) or Auth::user()->hasAnyRole(array('admin','modirator'))))
 
                                                 {{Form::open(array('method' => 'DELETE', 'url' => ['img/picture/destroy/'.$picture->id]))}}
-                                                    <button class="a" type="submit"><i class="fa fa-times"></i></button>
+                                                    <button class="a" type="submit"><i class="fa fa-trash"></i></button>
                                                 {{Form::close()}}
                                             @endif
 

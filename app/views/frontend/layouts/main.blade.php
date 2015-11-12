@@ -83,6 +83,7 @@
     @include('frontend.partials.footer')
  	@include('frontend.partials.modal')
  	<div id="overly"><i class="fa fa-refresh fa-spin"></i></div>
+    {{ HTML::script('libs/modernizr/modernizr-touch-events.js'); }}
     {{ HTML::script('js/default.js'); }}
     {{ HTML::script('libs/bootstrap-tagsinput/bootstrap-tagsinput.js'); }}
   </body>
