@@ -18,7 +18,11 @@
                                      }
                                  ?>
                                 <div data-href="" class="brick {{$picture->id}} {{$class}} " {{$attr}}>
-                                    <div class="overflow">
+                                    <div class="overflow" data-href="{{url('img/show/'.$picture->id.'/'.($picture->name() ? $picture->name() : $picture->firstKeyWord))}}">
+                                        <button class="picture-options-toggle bars">
+                                            <i class="fa fa-bars"></i>
+                                            <i class="fa fa-times"></i>
+                                        </button>
                                         <div class="img-close" >
                                             {{Form::open(array('method' => 'DELETE', 'url' => ['img/picture/destroy/'.$picture->id]))}}
                                                 <button class="a" type="submit"><i class="fa fa-times"></i></button>
@@ -39,7 +43,11 @@
                                                     @else
                                                         0
                                                     @endif
-                                                     <i class="fa fa-heart-o"></i>
+                                                    @if(Auth::check() && $picture->isLiked(Auth::user()->id))
+                                                        <i class="fa fa-heart"></i>
+                                                    @else
+                                                        <i class="fa fa-heart-o"></i>
+                                                    @endif
                                                 </a>
                                             @endif
 

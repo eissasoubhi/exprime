@@ -18,7 +18,7 @@
 				 		</div>
 			 		@endif
             	</div>
-                <div class="col-md-6 form-block"> 
+                <div class="col-md-6 form-block">
                     <h1>Contectez nous</h1>
                     <div class="infos-form-block ">
                         <strong class="company">
@@ -28,15 +28,15 @@
                             <label >E-mail : </label>
                             <span class="pull-right">contact@exprime.ma</span>
                         </div>
-                        <div class="inf tel">
+                        {{-- <div class="inf tel">
                             <label>Téléphone : </label>
                             <span class="pull-right">06 63 31 77 40</span>
-                        </div>
+                        </div> --}}
                         <div class="inf sn">
                             <label>Réseaux sociaux : </label>
                             <span class="pull-right">
-                                <a href="#" title="Facebook">Facebook</a> <span> | </span>
-                                <a href="#" title="Google">Google</a>
+                                <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a> <span> | </span>
+                                <a href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
                             </span>
                         </div>
                     </div>

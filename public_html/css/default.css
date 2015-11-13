@@ -686,7 +686,7 @@ button.btn-upload{
 .tt-suggestion.tt-selectable{
     color: #9B948C;
     cursor: pointer;
-    padding: 1px 10px;
+    padding: 9px 25px;
 }
 .tt-suggestion.tt-selectable:hover, .tt-suggestion.tt-selectable.tt-cursor{
     background-color: #9B948C;
@@ -811,15 +811,37 @@ button.picture-options-toggle .fa{
 button.picture-options-toggle.bars .fa-bars{
     display: block;
 }
-button.picture-options-toggle.times{
+/*button.picture-options-toggle.times{
     background-color: transparent;
-}
+}*/
 button.picture-options-toggle.times .fa-times{
     display: block;
 }
 html.touch button.picture-options-toggle{
     display: block!important;
 }
-html.touch .brick .img .view-hover{
+html.touch .brick .img .view-hover, button.btn.edit-img{
     display: none!important;
+}
+/*************************************mobile*/
+/*
+canvas#avpw_canvas_element.avpw_position_by_transform{
+    transform: none!important;
+    -moz-transform: none!important;
+    -webkit-transform: none!important;
+    max-width: 100%!important;
+    max-height: 100%!important;
+    left: 0!important;
+    top: 0!important;
+    right: 0!important;;
+    margin: auto;
+    bottom: 0!important;;
+    padding: 10px!important;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}*/
+#avpw_controls {
+    min-height: auto!important;
+    min-width: auto!important;
 }

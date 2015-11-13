@@ -17,8 +17,8 @@
                                         $attr = 'data-page="1"';
                                      }
                                  ?>
-                                <div data-href="" class="brick {{$picture->id}} {{$class}} " {{$attr}}>
-                                    <div class="overflow">
+                                <div  class="brick {{$picture->id}} {{$class}} " {{$attr}}>
+                                    <div class="overflow" data-href="{{url('img/show/'.$picture->id.'/'.($picture->name() ? $picture->name() : $picture->firstKeyWord))}}">
                                         <button class="picture-options-toggle bars">
                                             <i class="fa fa-bars"></i>
                                             <i class="fa fa-times"></i>
