@@ -6,18 +6,20 @@ class PictureController extends \BaseController {
 
 	public function index()
 	{
+		$page_title = "Explorer";
 		Session::flash('jscroll_resources', '1');
 		Session::flash('freewall_resources', '1');
 		Session::flash('visible_resources', '1');
         $pictures = Picture::orderBy('created_at', 'DESC')->simplePaginate(16);
-		return View::make('frontend.picture.index', compact('pictures'));
+		return View::make('frontend.picture.index', compact('pictures','page_title'));
 	}
 
 	public function create()
 	{
+		$page_title = "Uploader";
 		Session::flash('feather', '1');
 		Session::flash('ajax_file_upload_resources', '1');
-		return View::make('frontend.picture.create');
+		return View::make('frontend.picture.create', compact('page_title'));
 	}
 
 	public function keywords()
@@ -146,6 +148,7 @@ class PictureController extends \BaseController {
 
 	public function show($id)
 	{
+		$page_title = "nom de l'image";
 		$image = Picture::find($id);
 		$picture_keywords = array();
 		foreach ($image->keywords as $key => $kw)
@@ -154,11 +157,12 @@ class PictureController extends \BaseController {
 		}
 		// return dd($picture->comments()->get()[0]);
 		$keywords = implode(",", $picture_keywords);
-		return View::make('frontend.picture.show',compact('image','keywords'));
+		return View::make('frontend.picture.show',compact('image','keywords','page_title'));
 	}
 
 	public function edit($id)
 	{
+		$page_title = "Modifier l'image";
 		$image = Picture::find($id);
 		$picture_keywords = array();
 		foreach ($image->keywords as $key => $kw) {
@@ -167,7 +171,7 @@ class PictureController extends \BaseController {
 		$keywords = implode(",", $picture_keywords);
 		Session::flash('feather', '1');
 		Session::flash('ajax_file_upload_resources', '1');
-		return View::make('frontend.picture.edit',compact('image','keywords'));
+		return View::make('frontend.picture.edit',compact('image','keywords','page_title'));
 	}
 
 	public function update($id)
@@ -459,6 +463,7 @@ class PictureController extends \BaseController {
 
 	public function likes()
 	{
+		$page_title = "Images aimées";
 		Session::flash('jscroll_resources', '1');
 		Session::flash('freewall_resources', '1');
 		Session::flash('visible_resources', '1');
@@ -470,7 +475,7 @@ class PictureController extends \BaseController {
 
         $pictures = Picture::whereIn('id', $likes_ids)->simplePaginate(16);
         // return $likes_ids;
-		return View::make('frontend.picture.likes', compact('pictures'));
+		return View::make('frontend.picture.likes', compact('pictures','page_title'));
 	}
 
 	public function search()

@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'smtp',
+	'driver' => 'mailgun',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	'host' => 'smtp.mailgun.org',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ return array(
 	*/
 
 	// 'from' => array('address' => null, 'name' => null),
-	'from' => array('address' => "exprime.ma@gmail.com", 'name' => "exprime"),
+	'from' => array('address' => "contact@exprime.org", 'name' => "Eissa SOUBHI"),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ return array(
 	|
 	*/
 
-	'username' => "exprime.ma@gmail.com",
+	'username' => "postmaster@sandbox7aaf3ce7ce59484293718ae58ff597af.mailgun.org",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ return array(
 	|
 	*/
 
-	'password' => "exprime2015",
+	'password' => "f22a7ed41978b2f0a982b5ef962193bd",
 
 	/*
 	|--------------------------------------------------------------------------

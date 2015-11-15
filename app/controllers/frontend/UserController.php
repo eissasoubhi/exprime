@@ -5,7 +5,8 @@ class UserController extends \BaseController {
 
     public function index()
     {
-        return View::make('frontend.user.index');
+        $page_title = 'Accueil';
+        return View::make('frontend.user.index', compact('page_title'));
     }
 
 
@@ -137,8 +138,9 @@ class UserController extends \BaseController {
 
     public function edit()
     {
+        $page_title = "Profil";
         $user = User::find(Auth::id());
-        return View::make('frontend.user.profile', compact('user'));
+        return View::make('frontend.user.profile', compact('user', 'page_title'));
     }
 
     public function update()

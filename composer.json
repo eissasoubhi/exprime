@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"iron-io/iron_mq": "~3.0",
-		"hybridauth/hybridauth" : "dev-master"
+		"hybridauth/hybridauth" : "dev-master",
+		"guzzlehttp/guzzle": "~4.0"
 	},
 	"require-dev": {
 		"fzaninotto/faker":"dev-master"

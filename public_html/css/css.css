@@ -28,8 +28,9 @@ a:hover, button.a:hover{
 }
 
 .all{
+
 	width: 1200px;
-	margin:    0px auto;
+	margin:    10px auto;
 	border: 1px solid rgba(155, 87, 33, 0.41);
 }
 
@@ -155,7 +156,7 @@ a:hover, button.a:hover{
 .brick {
 	cursor: default;
 	float: left;
-	
+
 	position: relative;
 	border: 2px solid rgba(87, 70, 49, 0.81);
 }
@@ -201,7 +202,7 @@ a:hover, button.a:hover{
 	-webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
 	-moz-transition: all 0.5s ease;/* Firefox 4-15 */
 	-o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
-	transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */	
+	transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
 }
 .brick:hover .img-close{
 	top: 0;
@@ -289,7 +290,7 @@ a:hover, button.a:hover{
 }
 .grid  tr:nth-child(odd){
 	background-color: rgba(97, 69, 47, 0.1);
-	
+
 }
 .grid  a.button{
 
@@ -329,7 +330,7 @@ i{
 	margin: 2px 0px;
 	background-color: rgba(255, 255, 255, 0.32);
 	width: 910px;
-	
+
 }
 .form input[type="text"]{
 	width: 170px;
@@ -391,7 +392,7 @@ button.button:hover, a.button:hover{
 	color: #FFF;
 }
 .btn-form{
-	display: inline-block;	
+	display: inline-block;
 }
 .btn-panel{
 	display: block;
@@ -429,10 +430,10 @@ button.button:hover, a.button:hover{
 	height: 50px;
 	background-position: center;
 	background-repeat: no-repeat; ;
-	-webkit-background-size: cover; 
-	-moz-background-size: cover; 
-	-o-background-size: cover; 
-  	background-size: cover; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+  	background-size: cover;
 }
 
 img.img-picture-preview{

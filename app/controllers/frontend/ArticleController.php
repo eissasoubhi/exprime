@@ -5,16 +5,18 @@ class ArticleController extends \BaseController {
 
 	public function index($name)
 	{
+		$page_title = str_replace(array('-','_'),' ',$name);
 		$article = Article::where('name','=', $name)->get()->first();
 		if (!$article) {
-			return "404";
+			return "404 :(";
 		}
-		return View::make('frontend.article.index', compact('article'));
+		return View::make('frontend.article.index', compact('article','page_title'));
 	}
 
 	public function contact()
 	{
-		return View::make('frontend.article.contact');	
+		$page_title = "Contact";
+		return View::make('frontend.article.contact', compact('page_title'));
 	}
 
 	public function send()
@@ -45,11 +47,11 @@ class ArticleController extends \BaseController {
 							'fullname' => $full_name,
 							'subject' => $subject,
 							'content' => $message));
-		Mail::queue('frontend.article.email', 
+		Mail::send('frontend.article.email',
 			array("email" => $email,
 					"fullname" => $full_name,
 					"subject" => $subject,
-					"content" => $message), 
+					"content" => $message),
 			function($message) {
 		        $message->to("eissa.soubhi@gmail.com")
 		            	->subject('exprime contact : '.Input::get('subject'));

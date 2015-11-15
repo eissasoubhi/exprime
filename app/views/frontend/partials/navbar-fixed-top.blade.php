@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse" id="top-navbar-collapse">
               <ul class="nav navbar-nav">
                 <li ><a href="{{url('/')}}">ACCUEIL <span class="sr-only">(courant)</span></a></li>
-                <li><a href="{{url('page/about')}}">À PROPOS</a></li>
+                <li><a href="{{url('page/à-propos')}}">À PROPOS</a></li>
                 <li><a href="{{url('explorer')}}">EXPLORER</a></li>
                 <li><a href="{{url('contact')}}">CONTACT</a></li>
 

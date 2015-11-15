@@ -820,7 +820,7 @@ button.picture-options-toggle.times .fa-times{
 html.touch button.picture-options-toggle{
     display: block!important;
 }
-html.touch .brick .img .view-hover, button.btn.edit-img{
+html.touch .brick .img .view-hover,html.touch  button.btn.edit-img{
     display: none!important;
 }
 /*************************************mobile*/

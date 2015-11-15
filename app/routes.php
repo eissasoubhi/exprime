@@ -2,6 +2,7 @@
 
 
 View::share('title', "Exprime");
+View::share('page_title', "");
 
 $pictures_count = Picture::all()->count();
 $users_count = User::all()->count();
@@ -60,6 +61,8 @@ Route::group(['namespace' => 'frontend' ], function () {
 	Route::get('img/edit/{id}', 'PictureController@edit');
 	Route::get('img/search', 'PictureController@search');
 	Route::post('img/edit/{id}', 'PictureController@update');
+    Route::get('img/show/{id}/{name?}', 'PictureController@show');
+    Route::get('img/show/{id}/{name?}', 'PictureController@show');
     Route::get('img/show/{id}/{name?}', 'PictureController@show');
 	Route::get('img/download/{name}', 'PictureController@download');
 	Route::get('img/toggleLike/{id}', 'PictureController@toggleLike');

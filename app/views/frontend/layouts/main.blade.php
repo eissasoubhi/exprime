@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{$title}}</title>
+	<title>{{$title." - ".$page_title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="description" content="un site Web permet aux utilisateurs de trouver images Memes qui pourraient être utilisés dans les commentaires Facebook pour être plus expressifs, et ils peuvent également créer leurs propres Memes | a website allows users to find memes pictures that could be used in facebook comments to be more expressive, and they can also create their own memes " />
     <meta name="keywords" content="générateur de Memes mobile support, télécharger vos propres images pour faire des Memes personnalisés " />
