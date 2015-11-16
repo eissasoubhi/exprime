@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7658e8d6c00d24159e80296aab468d67",
-    "content-hash": "81bf03826f3c99d20a023c97a5c9fa1a",
+    "hash": "9f7d7cf5d83e270ff3d4194445e76920",
+    "content-hash": "68dfc7f0c26da8681c35c80d503103be",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -411,16 +411,16 @@
         },
         {
             "name": "iron-io/iron_mq",
-            "version": "3.0.3",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iron-io/iron_mq_php.git",
-                "reference": "ddb10b72f2e3255d6df71a5192a46103bc211550"
+                "reference": "90e796570f61b6e63b44296d7300747c51833b92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iron-io/iron_mq_php/zipball/ddb10b72f2e3255d6df71a5192a46103bc211550",
-                "reference": "ddb10b72f2e3255d6df71a5192a46103bc211550",
+                "url": "https://api.github.com/repos/iron-io/iron_mq_php/zipball/90e796570f61b6e63b44296d7300747c51833b92",
+                "reference": "90e796570f61b6e63b44296d7300747c51833b92",
                 "shasum": ""
             },
             "require": {
@@ -452,7 +452,7 @@
                 "iron",
                 "iron_mq"
             ],
-            "time": "2015-05-01 09:37:21"
+            "time": "2015-02-12 15:38:54"
         },
         {
             "name": "jeremeamia/SuperClosure",
