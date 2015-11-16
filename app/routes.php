@@ -82,14 +82,14 @@ Route::post('queue/receive', function()
 {
     return Queue::marshal();
 });
-Route::get('ironmq',function ()
-{
-    $time = time();
-    Queue::push(function ($job) use($time)
-    {
-        File::append(app_path()."/time.txt",$time.PHP_EOL);
-    });
-});
+// Route::get('ironmq',function ()
+// {
+//     $time = time();
+//     Queue::push(function ($job) use($time)
+//     {
+//         File::append(app_path()."/time.txt",$time.PHP_EOL);
+//     });
+// });
 /*Event::listen('illuminate.query', function($query)
 {
     var_dump($query);
