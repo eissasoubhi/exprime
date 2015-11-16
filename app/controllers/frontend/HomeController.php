@@ -30,7 +30,7 @@ class HomeController extends \BaseController {
             'email'    => 'required|email|unique:user',
             'login'    => 'required|min:5|unique:user',
             'password'    => 'required|min:8|confirmed',
-            'terms'    => 'required' 
+            'terms'    => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -62,7 +62,7 @@ class HomeController extends \BaseController {
 	{
 		$rules = array(
             'login'    => 'required',
-            'password' => 'required:' 
+            'password' => 'required:'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -79,7 +79,7 @@ class HomeController extends \BaseController {
             'password' => Input::get('password'),
             'role_id' => Role::where('name','=','admin')->first()->id
         );
-        if(Auth::attempt($userdata, Input::has("save_cnt"))) 
+        if(Auth::attempt($userdata, Input::has("save_cnt")))
         {
             return Redirect::intended('admin');
         }
