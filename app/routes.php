@@ -89,7 +89,7 @@ Route::get('ironmq',function ()
     {
         File::append(app_path()."time.txt",$time.PHP_EOL)
     })
-})
+});
 /*Event::listen('illuminate.query', function($query)
 {
     var_dump($query);
