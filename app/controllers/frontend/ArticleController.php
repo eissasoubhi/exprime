@@ -47,7 +47,7 @@ class ArticleController extends \BaseController {
 							'fullname' => $full_name,
 							'subject' => $subject,
 							'content' => $message));
-		Mail::send('frontend.article.email',
+		Mail::queue('frontend.article.email',
 			array("email" => $email,
 					"fullname" => $full_name,
 					"subject" => $subject,
