@@ -66,7 +66,7 @@ class UserController extends \BaseController {
                             'role_id' => Role::where('name','=','user')->first()->id,
                             'confirmation_code' => $confirmation_code));
 
-        Mail::mail('emails.auth.verify', array("confirmation_code" => $confirmation_code), function($message) use($user_info) {
+        Mail::send('emails.auth.verify', array("confirmation_code" => $confirmation_code), function($message) use($user_info) {
             $message->to($user_info['email'], $user_info['login'])
                 ->subject('Verifiez votre adresse mail ');
         });

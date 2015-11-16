@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7658e8d6c00d24159e80296aab468d67",
-    "content-hash": "81bf03826f3c99d20a023c97a5c9fa1a",
+    "hash": "c335de5d858e577b8c103333ee9a09ed",
+    "content-hash": "1bb32731b78747771c6c5b421ac52cb4",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -411,16 +411,16 @@
         },
         {
             "name": "iron-io/iron_mq",
-            "version": "3.0.3",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iron-io/iron_mq_php.git",
-                "reference": "ddb10b72f2e3255d6df71a5192a46103bc211550"
+                "reference": "ea24cf11f05152079d392950092465c055823ebe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iron-io/iron_mq_php/zipball/ddb10b72f2e3255d6df71a5192a46103bc211550",
-                "reference": "ddb10b72f2e3255d6df71a5192a46103bc211550",
+                "url": "https://api.github.com/repos/iron-io/iron_mq_php/zipball/ea24cf11f05152079d392950092465c055823ebe",
+                "reference": "ea24cf11f05152079d392950092465c055823ebe",
                 "shasum": ""
             },
             "require": {
@@ -452,7 +452,7 @@
                 "iron",
                 "iron_mq"
             ],
-            "time": "2015-05-01 09:37:21"
+            "time": "2015-10-30 11:06:08"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -1924,12 +1924,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "cd5fb1c262e1734366e77688b011a0f0422ce06d"
+                "reference": "008e69f17a1286c29b8a60082119b7d6eee69082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/cd5fb1c262e1734366e77688b011a0f0422ce06d",
-                "reference": "cd5fb1c262e1734366e77688b011a0f0422ce06d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/008e69f17a1286c29b8a60082119b7d6eee69082",
+                "reference": "008e69f17a1286c29b8a60082119b7d6eee69082",
                 "shasum": ""
             },
             "require": {
@@ -1966,7 +1966,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-11-09 08:00:48"
+            "time": "2015-11-16 08:55:57"
         }
     ],
     "aliases": [],

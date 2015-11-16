@@ -5,6 +5,7 @@
 /app/config/production
 /app/config/local
 /app/config/fb_auth.php
+/app/config/queue.php
 /app/config/google_auth.php
 /app/config/mail.php
 /app/config/services.php
