@@ -1,11 +1,11 @@
-<?php 
+<?php
 namespace backend;
-use User; use View; use Input; use Validator; use Redirect;  use Hash;  use Role;   use Auth; 
+use User; use View; use Input; use Validator; use Redirect;  use Hash;  use Role;   use Auth;
 class UserController extends \BaseController {
 
 	public function index()
 	{
-		$users = User::paginate(10);
+		$users = User::orderBy('created_at', 'DESC')->paginate(10);
 		return View::make('backend.user.all_users', compact('users'));
 	}
 
@@ -85,7 +85,7 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		
+
 	}
 
 
@@ -158,7 +158,7 @@ class UserController extends \BaseController {
 				$errors = array(0 => 'Anicien mot de passe incorrect.');
 			    return Redirect::to('admin/user/'.$id.'/edit')->withErrors($errors)->withInput(Input::except('password'));;
 			}
-		}		
+		}
 		$user->email = $email;
 		$user->login = $login;
 		$user->password = Hash::make($new_password);
