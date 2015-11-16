@@ -45,7 +45,7 @@ Route::group(['namespace' => 'frontend' ], function () {
 	Route::get('/', 'UserController@index');
 	Route::get('sign-up', 'UserController@signUp');
 	Route::post('sign-up', 'UserController@doSignUp');
-	Route::get('password/reset', 'UserController@passwordResetLink');
+	Route::post('password/reset', 'UserController@passwordResetLink');
 	Route::get('password/reset/{token}', 'UserController@passwordReset');
 	Route::post('password/reset/{token}', 'UserController@passwordChange');
 	Route::get('logout', 'UserController@logout');
