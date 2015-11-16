@@ -87,7 +87,7 @@ Route::get('ironmq',function ()
     $time = time();
     Queue::push(function ($job) use($time)
     {
-        File::append(app_path()."time.txt",$time.PHP_EOL);
+        File::append(app_path()."/time.txt",$time.PHP_EOL);
     });
 });
 /*Event::listen('illuminate.query', function($query)
