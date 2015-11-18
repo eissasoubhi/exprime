@@ -45,16 +45,16 @@
 			    @include('backend.partials.top_menu')
 				@include('backend.partials.user_menu')
 			@endif
-			
+
 			<div class="clear">
-				
+
 			</div>
 		</div>
 
 		<div class="page">
 			@if(Auth::check() && Auth::user()->hasRole("admin"))
 			    @include('backend.partials.left_menu')
-			@endif<!-- 
+			@endif<!--
 		 -->@yield('content')
 		</div><!-- end of "page" tag -->
 			<div class="footer">
@@ -100,7 +100,7 @@
 							    	if (msg != "1") {
 							    		alert(msg);
 							    	};
-							        
+
 							    }
 							});
 				        }

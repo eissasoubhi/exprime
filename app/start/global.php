@@ -58,7 +58,7 @@ App::error(function(Exception $exception, $code)
 	$line =$exception->getLine();
 	$file_in_db = mysql_real_escape_string ($file);
 	$line_in_db =mysql_real_escape_string ($line);
-	
+
 	$fatal = 0;
 
 	if(!Error::whereRaw("url = '$url' and code = '$code' and file = '$file_in_db' and line = $line_in_db")->exists()){
@@ -71,13 +71,13 @@ App::error(function(Exception $exception, $code)
 							'file' => $file,
 							'line' => $line,
 							'fatal' => $fatal,
-							'type' => $type));	
+							'type' => $type));
 	}
-	
+
 	// dd($exception);
-	
+
 	* todo : fontend view for error
-	
+
 	// return ":( Erreur s'est produite ! ";
 
 });
@@ -103,7 +103,7 @@ App::fatal(function($exception)
 							'file' => $file,
 							'line' => $line,
 							'fatal' => $fatal,
-							'type' => $type));	
+							'type' => $type));
 	}
 	*/
 	// dd($exception);
@@ -112,7 +112,15 @@ App::fatal(function($exception)
 	*/
 	// return ":( Erreur s'est produite ! ";
 });
-
+App::missing(function($exception)
+{
+	$page_title = "page 404 :(";
+	$article = Article::where('name','=', '404')->get()->first();
+	if (!$article) {
+		return Response::view('frontend.article.alternative-404-page', compact('page_title'), 404);
+	}
+    return Response::view('frontend.article.index', compact('article','page_title'), 404);
+});
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

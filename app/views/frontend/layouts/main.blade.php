@@ -64,7 +64,7 @@
 	@endif
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
-			currentPage = '{{url(Route::current()->getPath())}}';
+			currentPage = '{{Route::current() !== null  ? url(Route::current()->getPath()) : "404"}}';
 			$('.navbar-nav a[href="'+ currentPage +'"]').parent().addClass('current');
 		});
 	</script>
