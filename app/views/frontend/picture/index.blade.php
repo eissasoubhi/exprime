@@ -93,6 +93,19 @@
                     $pagination.wrap('<div class="text-center"></div>');
                 };
             }
+
+            function picDeleteEvent ()
+            {
+                $('[data-href]').click(function(event)
+                {
+                    event.stopPropagation();
+                    if(this === (event.target || event.srcElement))
+                    {
+                        document.location.href = $(this).attr('data-href');
+                    }
+                });
+            }
+
             jQuery(document).ready(function($) {
                 $('#container').jscroll({
                     padding: 20,
@@ -104,6 +117,7 @@
                         $(window).trigger("resize");
                         $(this).fadeIn(500);
                         pagination_position(this);
+                        picDeleteEvent();
                         // var url = window.location.origin + window.location.pathname
                         var url = window.location.origin + window.location.pathname
                         var search = "?";
