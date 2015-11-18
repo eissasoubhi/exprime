@@ -10,9 +10,9 @@ class Picture extends Eloquent    {
 		return $this->belongsTo('User');
 	}
 
-    public function clipedName()
+    public function clipedName($limit=20)
     {
-        return str_limit($this->name, 20);
+        return e(str_limit($this->name, $limit));
     }
 
     public function keywords()
@@ -46,7 +46,7 @@ class Picture extends Eloquent    {
     {
     	$fullname = explode("__", $this->name);
     	// return dd($fullname);
-    	return (strrpos($this->name, "__")) ? $fullname[0] : "" ;
+    	return e((strrpos($this->name, "__")) ? $fullname[0] : "") ;
     }
 
 	public function sizeUnit()
@@ -85,7 +85,7 @@ class Picture extends Eloquent    {
 
     public function getFirstKeywordAttribute()
     {
-        return (!$this->keywords->isEmpty()) ? $this->keywords->first()->keyword : "";
+        return e((!$this->keywords->isEmpty()) ? $this->keywords->first()->keyword : "");
     }
 }
 

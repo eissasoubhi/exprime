@@ -241,7 +241,7 @@ body .footer ul a{
     position: absolute;
     bottom: 0;
     width: 90%;;
-
+    white-space: nowrap;
 }
 .brick:hover .img .view-hover{
     display: block;

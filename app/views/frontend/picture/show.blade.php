@@ -84,7 +84,7 @@
                               </div>
                           </div>
                           <div class="panel-body">
-                            {{nl2br($comment->content)}}
+                            {{e(nl2br($comment->content))}}
                           </div>
                         </div>
                       </div>

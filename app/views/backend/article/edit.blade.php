@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-	@section('content')<!-- 
+	@section('content')<!--
 	 --><div class="content">
 		 	<div class="title">
 		 		<h1>Role {{$article->name}}</h1>
@@ -24,16 +24,16 @@
 	 					{{Form::label('name', "Nom de l'article : ");}} {{Form::text('name');}}
 		 			</div>
 		  			<div class="form_group">
-	 					{{Form::label('content');}} {{Form::textarea ('content','', array("id" => "ckeditor"))}} 
+	 					{{Form::label('content');}} {{Form::textarea ('content','', array("id" => "ckeditor"))}}
 		 			</div>
 		  			<div class="btn-panel">
 		  				<button class="button-ok" type="submit" title="Valider"><i class="fa fa-check"></i>Modifer</button>
 		  				<a class="button" href="{{ url('admin/article')}}" type="button" title="Annuler"><i class="fa fa-arrow-left"></i>Annuler</a>
 		  			</div>
-				{{ Form::close() }}	
+				{{ Form::close() }}
 		 	</div>
-		 	
-		</div>	
+
+		</div>
 		<script type="text/javascript">
 			window.onload = function()
 			{

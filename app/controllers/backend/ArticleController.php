@@ -39,7 +39,7 @@ class ArticleController extends \BaseController {
 		$content = Input::get('content');
 		$validator = Validator::make(
 		    array('name' => $name),
-		    array('name' => 'required|min:5|unique:article')
+		    array('name' => 'required|min:2|unique:article')
 		);
 		if ($validator->fails())
 		{
@@ -95,14 +95,14 @@ class ArticleController extends \BaseController {
 		$content = Input::get('content');
 		$validator = Validator::make(
 		    array('name' => $name),
-		    array('name' => 'required|min:5|unique:article,id,'.$id)
+		    array('name' => 'required|min:2|unique:article,id,'.$id)
 		);
 		if ($validator->fails())
 		{
 			$messages = $validator->messages();
 		    return Redirect::to("admin/article/$id/edit")->withInput()->withErrors($messages);
 		}
-		
+
 		$article->name = $name;
 		$article->content = $content;
 		$article->save();

@@ -29,13 +29,14 @@
                                             {{Form::close()}}
                                             <div class="clear"></div>
                                         </div>
-                                        <div class="hover-btns">
-                                            <a href="{{url('img/download/'.$picture->name)}}" title="{{$picture->name}}">
+                                        <a href="{{e(url('img/download/'.$picture->name))}}" title="{{e($picture->name)}}">
                                                 <i class="fa fa-download"></i>
                                             </a>
-                                            <a href="{{url('img/edit/'.$picture->id)}}" title="">
-                                                <i class="fa fa-pencil-square-o"></i>
-                                            </a>
+                                            @if(Auth::check())
+                                                <a href="{{e(url('img/edit/'.$picture->id))}}" title="{{e($picture->name)}}">
+                                                    <i class="fa fa-pencil-square-o"></i>
+                                                </a>
+                                            @endif
                                             @if(Auth::check())
                                                 <a class="img-like-btn" data-img-like="{{url('img/toggleLike/'.$picture->id)}}" title="">
                                                     @if($picture->has('likes'))
@@ -61,7 +62,7 @@
                                         <div class="view-hover">
                                             <img  src="{{url('content/'.$picture->url_origin.'?'.(!$picture->name() ? $picture->firstKeyWord : ($picture->firstKeyWord ? $picture->firstKeyWord : $picture->name() )))}}" alt="{{$picture->name() ? $picture->name() : $picture->firstKeyWord}}">
                                             <div class="title">
-                                                {{$picture->name}}
+                                                {{e($picture->name)}}
                                             </div>
                                         </div>
                                     </div>

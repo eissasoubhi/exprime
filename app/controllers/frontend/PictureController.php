@@ -43,7 +43,7 @@ class PictureController extends \BaseController {
 	public function store()
 	{
 		$picture = Input::all();
-		$name =  str_replace(array(' ',"'","__" ), "-",$picture['img-name']);
+		$name =  str_replace(array(' ',"'","__",'/' ), "-",$picture['img-name']);
 		$search_keywors =  $picture['search-keywors'];
 		$img_url =  $picture['img-url'];
 		// $token =  $picture['token'];
@@ -179,7 +179,7 @@ class PictureController extends \BaseController {
 		$picture = Input::all();
 		// dd($picture);
 		$image = Picture::find($id);
-		$name =  str_replace(array(' ',"'","__"), "-",$picture['img-name']);
+		$name =  str_replace(array(' ',"'","__",'/'), "-",$picture['img-name']);
 		$search_keywors =  $picture['search-keywors'];
 		$img_url =  $picture['img-url'];
 		$editedImgUrl =  $picture['editedImg'];
