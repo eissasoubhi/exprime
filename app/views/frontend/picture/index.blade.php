@@ -94,16 +94,40 @@
                 };
             }
 
-            function picDeleteEvent ()
+            function refrechPicEvents ()
             {
-                $('[data-href]').click(function(event)
-                {
+               $('form input[name="_method"][type="hidden"][value="DELETE"] ~ button[type="submit"]:not(\'.delete-modal-submit\')').click(function(event) {
+                event.preventDefault();
+                $('#delete-modal form.commit-delete').attr('action',$(this).parent('form').attr('action'));
+                $('#delete-modal').modal();
+               });;
+
+                $('button.picture-options-toggle').click(function(event) {
+                    // alert($('.brick:hover .hover-btns').css('bottom'));
+                    if ($('.brick:hover .hover-btns').css('bottom') == '0px' || $('.brick:hover .img-close').css('top') == '0px')
+                    {   // options hidden
+                        $('.brick:hover .hover-btns').css('bottom', '-30px');
+                        $('.brick:hover .img-close').css('top', '-30px');
+                        $(this).removeClass('times').addClass('bars')
+                    }
+                    else
+                        {   // options visible
+                        $('.brick:hover .hover-btns').css('bottom', '0');
+                        $('.brick:hover .img-close').css('top', '0');
+                        $(this).addClass('times').removeClass('bars')
+                    };
+                });
+
+                $('[data-href]').click(function(event) {
                     event.stopPropagation();
+                    // alert('this : ' + $(this).attr('class'))
+                    // alert('event.target : ' + $(event.target).attr('class'))
                     if(this === (event.target || event.srcElement))
                     {
                         document.location.href = $(this).attr('data-href');
                     }
                 });
+
             }
 
             jQuery(document).ready(function($) {
@@ -117,7 +141,7 @@
                         $(window).trigger("resize");
                         $(this).fadeIn(500);
                         pagination_position(this);
-                        picDeleteEvent();
+                        refrechPicEvents();
                         // var url = window.location.origin + window.location.pathname
                         var url = window.location.origin + window.location.pathname
                         var search = "?";
