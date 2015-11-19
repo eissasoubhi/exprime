@@ -42,6 +42,33 @@ Route::group([ 'prefix' => 'admin', 'namespace' => 'backend' ], function () {
 });
 
 Route::group(['namespace' => 'frontend' ], function () {
+    //  auth filter
+    Route::group(array('before' => 'auth'), function()
+    {
+        Route::get('profile', 'UserController@edit');
+        Route::post('profile', 'UserController@update');
+        Route::post('tempup', 'PictureController@uploadTemp');
+        Route::get('upload', 'PictureController@create');
+        Route::post('upload', 'PictureController@store');
+        Route::get('likes', 'PictureController@likes');
+        Route::post('img/comment/store', 'CommentController@store');
+    });
+    //picture filter
+    Route::group(array('before' => 'pic_permission'), function()
+    {
+        Route::get('img/edit/{id}', 'PictureController@edit');
+        Route::post('img/edit/{id}', 'PictureController@update');
+        Route::delete('img/picture/destroy/{id}', 'PictureController@destroy');
+    });
+
+    //  comment filter
+    Route::group(array('before' => 'comment_permission'), function()
+    {
+        Route::post('img/comment/update/{id}', 'CommentController@update');
+        Route::delete('img/comment/destroy/{id}', 'CommentController@destroy');
+    });
+
+
 	Route::get('/', 'UserController@index');
 	Route::get('sign-up', 'UserController@signUp');
 	Route::post('sign-up', 'UserController@doSignUp');
@@ -50,27 +77,15 @@ Route::group(['namespace' => 'frontend' ], function () {
 	Route::post('password/reset/{token}', 'UserController@passwordChange');
 	Route::get('logout', 'UserController@logout');
 	Route::get('login', 'UserController@login');
-	Route::get('profile', 'UserController@edit');
-	Route::post('profile', 'UserController@update');
 	Route::post('login', 'UserController@doLogin');
 	Route::get('explorer', 'PictureController@index');
-	Route::get('upload', 'PictureController@create');
-	Route::post('upload', 'PictureController@store');
-	Route::post('tempup', 'PictureController@uploadTemp');
 	Route::get('ajax/keywords', 'PictureController@keywords');
-	Route::get('img/edit/{id}', 'PictureController@edit');
 	Route::get('img/search', 'PictureController@search');
-	Route::post('img/edit/{id}', 'PictureController@update');
     Route::get('img/show/{id}/{name?}', 'PictureController@show');
     Route::get('img/show/{id}/{name?}', 'PictureController@show');
     Route::get('img/show/{id}/{name?}', 'PictureController@show');
 	Route::get('img/download/{name}', 'PictureController@download');
 	Route::get('img/toggleLike/{id}', 'PictureController@toggleLike');
-	Route::get('likes', 'PictureController@likes');
-	Route::post('img/comment/store', 'CommentController@store');
-	Route::post('img/comment/update/{id}', 'CommentController@update');
-	Route::delete('img/comment/destroy/{id}', 'CommentController@destroy');
-	Route::delete('img/picture/destroy/{id}', 'PictureController@destroy');
 	Route::get('page/{name}', 'ArticleController@index');
 	Route::get('contact', 'ArticleController@contact');
 	Route::post('contact', 'ArticleController@send');

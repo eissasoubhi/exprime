@@ -77,7 +77,6 @@
                             <!-- <div class="clearfix"></div> -->
                             {{$pictures->links()}}
                         </div>
-
                     </div>
                 </div>
         </div>

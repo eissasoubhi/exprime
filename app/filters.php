@@ -48,18 +48,57 @@ Route::filter('admin', function () {
 	}
 });
 
+
 Route::filter('auth', function()
 {
 	if (Auth::guest())
 	{
-		if (Request::ajax())
+		$page_title = "page 401 :(";
+		$article = Article::where('name','=', '401')->get()->first();
+		if (!$article)
 		{
-			return Response::make('Unauthorized', 401);
+			return Response::view('frontend.article.alternative-401-page', compact('page_title'), 401);
 		}
-		else
+	    return Response::view('frontend.article.index', compact('article','page_title'), 404);
+	}
+});
+
+Route::filter('pic_permission', function($route)
+{
+	$id = $route->getParameter('id');
+	$picture = Picture::find($id);
+	if (!$picture)
+	{
+		App::abort(404);
+	}
+	if (Auth::guest() or !$picture->belongsToUser(Auth::user()) or !Auth::user()->hasAnyRole(array('admin','modirator')))
+	{
+		$page_title = "page 401 :(";
+		$article = Article::where('name','=', '401')->get()->first();
+		if (!$article)
 		{
-			return Redirect::guest('login');
+			return Response::view('frontend.article.alternative-401-page', compact('page_title'), 401);
 		}
+	    return Response::view('frontend.article.index', compact('article','page_title'), 404);
+	}
+});
+Route::filter('comment_permission', function($route)
+{
+	$id = $route->getParameter('id');
+	$comment = Comment::find($id);
+	if (!$comment)
+	{
+		App::abort(404);
+	}
+	if (Auth::guest() or !$comment->belongsToUser(Auth::user()) or !Auth::user()->hasAnyRole(array('admin','modirator')))
+	{
+		$page_title = "page 401 :(";
+		$article = Article::where('name','=', '401')->get()->first();
+		if (!$article)
+		{
+			return Response::view('frontend.article.alternative-401-page', compact('page_title'), 401);
+		}
+	    return Response::view('frontend.article.index', compact('article','page_title'), 404);
 	}
 });
 

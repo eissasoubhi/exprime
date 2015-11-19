@@ -17,19 +17,24 @@
                                         $attr = 'data-page="1"';
                                      }
                                  ?>
-                                <div data-href="" class="brick {{$picture->id}} {{$class}} " {{$attr}}>
+                                <div  class="brick {{$picture->id}} {{$class}} " {{$attr}}>
                                     <div class="overflow" data-href="{{url('img/show/'.$picture->id.'/'.($picture->name() ? $picture->name() : $picture->firstKeyWord))}}">
                                         <button class="picture-options-toggle bars">
                                             <i class="fa fa-bars"></i>
                                             <i class="fa fa-times"></i>
                                         </button>
                                         <div class="img-close" >
-                                            {{Form::open(array('method' => 'DELETE', 'url' => ['img/picture/destroy/'.$picture->id]))}}
-                                                <button class="a" type="submit"><i class="fa fa-times"></i></button>
-                                            {{Form::close()}}
+                                            @if(Auth::check() and ($picture->belongsToUser(Auth::user()) or Auth::user()->hasAnyRole(array('admin','modirator'))))
+
+                                                {{Form::open(array('method' => 'DELETE', 'url' => ['img/picture/destroy/'.$picture->id]))}}
+                                                    <button class="a" type="submit"><i class="fa fa-trash"></i></button>
+                                                {{Form::close()}}
+                                            @endif
+
                                             <div class="clear"></div>
                                         </div>
-                                        <a href="{{e(url('img/download/'.$picture->name))}}" title="{{e($picture->name)}}">
+                                        <div class="hover-btns">
+                                            <a href="{{e(url('img/download/'.$picture->name))}}" title="{{e($picture->name)}}">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                             @if(Auth::check())
@@ -38,7 +43,7 @@
                                                 </a>
                                             @endif
                                             @if(Auth::check())
-                                                <a class="img-like-btn" data-img-like="{{url('img/toggleLike/'.$picture->id)}}" title="">
+                                                <a target="_blank" class="img-like-btn" data-img-like="{{url('img/toggleLike/'.$picture->id)}}" title="">
                                                     @if($picture->has('likes'))
                                                         {{$picture->likes()->count()}}
                                                     @else
@@ -52,13 +57,14 @@
                                                 </a>
                                             @endif
 
-                                            <a href="{{url('img/show/'.$picture->id)}}" title="">
+                                            <a href="{{url('img/show/'.$picture->id.'/'.($picture->name() ? $picture->name() : $picture->firstKeyWord))}}" title="">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                    <div  class="img" style="background-image: url(content/{{$picture->url_origin}})">
+
+                                    <div  class="img" style="background-image: url({{url('content/'.$picture->url_origin)}})">
                                         <div class="view-hover">
                                             <img  src="{{url('content/'.$picture->url_origin.'?'.(!$picture->name() ? $picture->firstKeyWord : ($picture->firstKeyWord ? $picture->firstKeyWord : $picture->name() )))}}" alt="{{$picture->name() ? $picture->name() : $picture->firstKeyWord}}">
                                             <div class="title">
@@ -71,13 +77,12 @@
                             <!-- <div class="clearfix"></div> -->
                             {{$pictures->links()}}
                         </div>
-
                     </div>
                 </div>
         </div>
         <script type="text/javascript" charset="utf-8">
 
-        	$('.page').addClass('container-fluid').removeClass('container');
+            $('.page').addClass('container-fluid').removeClass('container');
             function pagination_position (parent) {
                 var $pagination = $(parent).find('.pagination');
                 var pageNumber = $(parent).find('.pagination li.active span').text();
@@ -87,6 +92,43 @@
                     $pagination.wrap('<div class="text-center"></div>');
                 };
             }
+
+            function refrechPicEvents ()
+            {
+               $('form input[name="_method"][type="hidden"][value="DELETE"] ~ button[type="submit"]:not(\'.delete-modal-submit\')').click(function(event) {
+                event.preventDefault();
+                $('#delete-modal form.commit-delete').attr('action',$(this).parent('form').attr('action'));
+                $('#delete-modal').modal();
+               });;
+
+                $('button.picture-options-toggle').click(function(event) {
+                    // alert($('.brick:hover .hover-btns').css('bottom'));
+                    if ($('.brick:hover .hover-btns').css('bottom') == '0px' || $('.brick:hover .img-close').css('top') == '0px')
+                    {   // options hidden
+                        $('.brick:hover .hover-btns').css('bottom', '-30px');
+                        $('.brick:hover .img-close').css('top', '-30px');
+                        $(this).removeClass('times').addClass('bars')
+                    }
+                    else
+                        {   // options visible
+                        $('.brick:hover .hover-btns').css('bottom', '0');
+                        $('.brick:hover .img-close').css('top', '0');
+                        $(this).addClass('times').removeClass('bars')
+                    };
+                });
+
+                $('[data-href]').click(function(event) {
+                    event.stopPropagation();
+                    // alert('this : ' + $(this).attr('class'))
+                    // alert('event.target : ' + $(event.target).attr('class'))
+                    if(this === (event.target || event.srcElement))
+                    {
+                        document.location.href = $(this).attr('data-href');
+                    }
+                });
+
+            }
+
             jQuery(document).ready(function($) {
                 $('#container').jscroll({
                     padding: 20,
@@ -98,9 +140,19 @@
                         $(window).trigger("resize");
                         $(this).fadeIn(500);
                         pagination_position(this);
+                        refrechPicEvents();
+                        // var url = window.location.origin + window.location.pathname
                         var url = window.location.origin + window.location.pathname
+                        var search = "?";
+                        if(window.location.search && window.location.search.indexOf("?page") == -1)
+                        {
+                            search = window.location.search + "&";
+                            if (search !== -1) {
+                                search = search.replace(/page=(.*)/g, "");
+                            };
+                        }
                         var pageNumber = $(this).find('.pageNumber').attr('data-page');
-                        window.history.pushState({}, '',url + '?page=' + pageNumber);
+                        window.history.pushState({}, '',url + search +'page=' + pageNumber);
                         function getBgImgPath(bg) {
                             return bg.replace(/^(url\(['"]?)/i,"").replace(/['"]?\)$/i,"");
                         }
@@ -114,6 +166,25 @@
                         }, function() {
                             $(this).parent().parent().children(".img").children(".view-hover").css("opacity","1")
                         });
+
+                        $(this).find('.img-like-btn').click(function(event) {
+                            var like_btn = this;
+                             $.ajax({
+                               url: $(this).attr('data-img-like'),
+                               type: 'GET'
+                             })
+                             .done(function(result) {
+                              console.log(result);
+                               if (result.state == "liked") {
+                                  $(like_btn).html(result.count+' <i class="fa fa-heart"></i>');
+                               } else if(result.state == "unliked"){
+                                  $(like_btn).html(result.count+' <i class="fa fa-heart-o"></i>');
+                               };
+                             })
+                             .fail(function() {
+                               console.log("like error file:picture.index");
+                             })
+                        })
                     }
                 });
                 var wall = new freewall(".list-thumbs");
@@ -139,7 +210,15 @@
                     });
                     var url = window.location.origin + window.location.pathname
                     var pageNumber = Math.min.apply(Math,pages);
-                    window.history.pushState({}, '',url + '?page=' + pageNumber);
+                    var search = "?";
+                    if(window.location.search && window.location.search.indexOf("?page") == -1)
+                        {
+                            search = window.location.search + "&";
+                            if (search !== -1) {
+                                search = search.replace(/page=(.*)/g, "");
+                            };
+                        }
+                        window.history.pushState({}, '',url + search +'page=' + pageNumber);
 
                 });
                 pagination_position('.list-thumbs');
