@@ -234,6 +234,9 @@ body .footer ul a{
     border: 2px solid #FFFFFF;
     padding-bottom: 30px;
 }
+.brick .img .view-hover:hover{
+  display: none;
+}
 .brick .title{
     padding: 10px 0px 4px 0px;
     overflow: hidden;

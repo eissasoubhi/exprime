@@ -52,12 +52,12 @@ Route::group(['namespace' => 'frontend' ], function () {
         Route::post('upload', 'PictureController@store');
         Route::get('likes', 'PictureController@likes');
         Route::post('img/comment/store', 'CommentController@store');
+        Route::get('img/edit/{id}', 'PictureController@edit');
+        Route::post('img/edit/{id}', 'PictureController@update');
     });
     //picture filter
     Route::group(array('before' => 'pic_permission'), function()
     {
-        Route::get('img/edit/{id}', 'PictureController@edit');
-        Route::post('img/edit/{id}', 'PictureController@update');
         Route::delete('img/picture/destroy/{id}', 'PictureController@destroy');
     });
 

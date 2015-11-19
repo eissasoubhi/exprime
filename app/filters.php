@@ -53,13 +53,7 @@ Route::filter('auth', function()
 {
 	if (Auth::guest())
 	{
-		$page_title = "page 401 :(";
-		$article = Article::where('name','=', '401')->get()->first();
-		if (!$article)
-		{
-			return Response::view('frontend.article.alternative-401-page', compact('page_title'), 401);
-		}
-	    return Response::view('frontend.article.index', compact('article','page_title'), 404);
+		return Redirect::guest('login');
 	}
 });
 

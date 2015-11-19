@@ -5,6 +5,9 @@
                     <div class="list-thumbs">
                         <div id="container" class="grid-layout">
                             <?php $new_added_pic_id = Session::get('new_added_pic_id'); ?>
+                            <script>
+                                {{"var new_added_pic_id = ".$new_added_pic_id}}
+                            </script>
                             @foreach ($pictures as $key => $picture)
                                 <?php $class= $attr= ""; ?>
                                 @if($picture->id == $new_added_pic_id)
@@ -141,6 +144,11 @@
                         $(this).fadeIn(500);
                         pagination_position(this);
                         refrechPicEvents();
+                        if (typeof new_added_pic_id !== 'undefined')
+                        {
+                            $(".brick."+new_added_pic_id).addClass('new_added_image animated flash');
+                        }
+
                         // var url = window.location.origin + window.location.pathname
                         var url = window.location.origin + window.location.pathname
                         var search = "?";

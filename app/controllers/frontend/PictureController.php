@@ -311,7 +311,7 @@ class PictureController extends \BaseController {
 			$image->keywords()->sync($keyword_ids);
 			$picCount = Picture::where('id','<=',$image->id)->count();
 			$all_pics_count = Picture::all()->count();
-			$page = ( ceil($all_pics_count/16) - ceil($picCount/16)) + 1; //16 = nb pic per page
+			$page = ( ceil($all_pics_count/16) - ceil($picCount/16)) ; //16 = nb pic per page
 			$param = ($page !=0 && $page != 1) ? "?page=".$page : "" ;
 			// return "id : ".$image->id.", count : ".$picCount.", floor : ".$page;
 			// return "explorer ".$picCount;

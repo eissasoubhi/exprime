@@ -53,7 +53,7 @@ class UserController extends \BaseController {
         if ($validator->fails())
         {
             $messages = $validator->messages();
-            return Redirect::to("login")->withErrors($messages)->withInput(Input::except('password'));;
+            return Redirect::to("sign-up")->withErrors($messages)->withInput(Input::except('password'));;
         }
 
         $confirmation_code = str_random(30);
