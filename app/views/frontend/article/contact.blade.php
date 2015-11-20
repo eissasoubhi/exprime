@@ -11,7 +11,7 @@
 				 		</div>
 			 		@endif
 			 		@if(Session::has('messages'))
-						<div class="ok-msg msg">
+						<div class="alert alert-success">
 				 			@foreach (Session::get('messages') as $msg)
 							    <p>{{ $msg}}</p>
 							@endforeach

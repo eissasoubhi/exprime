@@ -64,7 +64,7 @@ return array(
     "required_without_all" => "Le champ :attribute est requis quand aucun de :values n'est présent.",
     "same"                 => "Les champs :attribute et :other doivent être identiques.",
     "size"                 => array(
-        "numeric" => "La valeur de :attribute doit être :size.",
+        "numeric" => "La valeur de :attribute doit être :size kilo-octets.",
         "file"    => "La taille du fichier de :attribute doit être de :size kilo-octets.",
         "string"  => "Le texte de :attribute doit contenir :size caractères.",
         "array"   => "Le tableau :attribute doit contenir :size éléments."

@@ -56,7 +56,7 @@ class ArticleController extends \BaseController {
 		        $message->to("eissa.soubhi@gmail.com")
 		            	->subject('exprime contact : '.Input::get('subject'));
 	        });
-		$messages = array('Le message est envoyé.');
+		$messages = array('Le message a été envoyé.');
 		return Redirect::back()->withMessages($messages);
 	}
 }
