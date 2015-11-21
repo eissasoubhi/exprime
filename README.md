@@ -16,9 +16,11 @@
 
 Exprime is a responsive website allows Facebook users mostly Moroccan Facebook users to find memes pictures that could be used in facebook comments to be more expressive, and they can also create their own memes.
 
+Created by [@eissa_soubhi](https://twitter.com/eissa_soubhi)
+
 #<a name="preview"></a>Live preview
 
-[Click here](exprime.org) to see Exprime in action
+[Click here](http://exprime.org) to see Exprime in action
 
 #<a name="license"></a>License
 
