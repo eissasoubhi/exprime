@@ -10,9 +10,9 @@
 - [Known bugs](#T)
 - [To do list](#T)
 - [Contribute](#T)
-- [License](#License)
+- [License](#license)
 
-#License
+## <a name="license"></a>License
 
 The contents of this repository is licensed under [The MIT License.](https://opensource.org/licenses/MIT)
 
