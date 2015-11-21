@@ -87,3 +87,5 @@
             </div>
         </div>
     </nav>
+    <span id="forkongithub"><a href="https://github.com/netfox01/exprime">Fork me on GitHub</a></span>
+    {{-- <a class="fork-me" href="https://github.com/netfox01/exprime"><img src="{{url('img/github.png')}}" alt="fork me on github"></a> --}}

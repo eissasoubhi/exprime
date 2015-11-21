@@ -8,7 +8,7 @@
 
         <div>
         	Merci d'avoir créé un compte exprime.<br>
-            S'il vous plaît suivez le lien ci-dessous pour vérifier votre adresse e-mail
+            S'il vous plaît suivez le lien ci-dessous pour vérifier votre adresse e-mail<br>
             {{ URL::to('register/verify/' . $confirmation_code) }}.<br/>
         </div>
 

@@ -35,8 +35,9 @@
                         <div class="inf sn">
                             <label>Réseaux sociaux : </label>
                             <span class="pull-right">
-                                <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a> <span> | </span>
-                                <a href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="https://github.com/netfox01" title="Github"><i class="fa fa-github"></i></a> <span> | </span>
+                                <a href="https://www.facebook.com/eissa.p.soubhi" title="Facebook"><i class="fa fa-facebook"></i></a> <span> | </span>
+                                <a href="https://twitter.com/eissa_soubhi" title="Twitter"><i class="fa fa-twitter"></i></a>
                             </span>
                         </div>
                     </div>
