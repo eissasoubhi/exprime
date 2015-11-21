@@ -4,23 +4,43 @@
 
 - [Introduction](#intro)
 - [Live preview](#preview)
-- [How to use](#T)
-- [Terms of use](#T)
-- [Contact info](#T)
-- [Known bugs](#T)
-- [To do list](#T)
-- [Contribute](#T)
+- [How to use](#how-to-use)
+- [Terms of use](#terms)
+- [Contact info](#contact)
+- [Known bugs](#bugs)
+- [To do list](#to-do-list)
+- [Contribute](#contribute)
 - [License](#license)
 
 #<a name="intro"></a>Introduction
 
-Exprime is a responsive website allows Facebook users mostly Moroccan Facebook users to find memes pictures that could be used in facebook comments to be more expressive, and they can also create their own memes.
+Exprime is a responsive website allows Facebook users mostly Moroccan users to find memes pictures that could be used in facebook comments to be more expressive, and they can also create their own memes.
 
 Created by [@eissa_soubhi](https://twitter.com/eissa_soubhi)
 
 #<a name="preview"></a>Live preview
 
-[Click here](http://exprime.org) to see Exprime in action
+[Click here](http://exprime.org) to see Exprime in action.
+
+#<a name="how-to-use"></a>How to use
+
+[Browse](http://exprime.org/explorer) the memes pictures that are sorted by date added or lock for them in search field.
+
+Once you found your desired meme picture you can download it or get link so you can share it o add it in your Facebook comments.
+
+Exprime allos you to add your own memes pictures as well, but to do so you must quickly [sign up](http://exprime.org/sign-up).
+
+Having an Exprime account gives access to many further features (your memes pictures favorite list,mems pictures custom text, comments...)
+
+#<a name="terms"></a>Terms of use
+
+#<a name="contact"></a>Contact info
+
+#<a name="bugs"></a>Known bugs
+
+#<a name="to-do-list"></a>To do list
+
+#<a name="Contribute"></a>contribute
 
 #<a name="license"></a>License
 
