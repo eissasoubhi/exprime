@@ -389,7 +389,13 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
         $('html').addClass('touch');
     }
 
-    $('button.picture-options-toggle').click(function(event) {
+    if (deviceAgent.match(/(iemobile)/))
+    {
+        $('html').addClass('iemobile');
+    }
+
+    $('button.picture-options-toggle').click(function(event)
+    {
         // alert($('.brick:hover .hover-btns').css('bottom'));
         if ($('.brick:hover .hover-btns').css('bottom') == '0px' || $('.brick:hover .img-close').css('top') == '0px')
         {   // options hidden

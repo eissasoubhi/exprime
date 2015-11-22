@@ -8,7 +8,7 @@ class ArticleController extends \BaseController {
 		$page_title = str_replace(array('-','_'),' ',$name);
 		$article = Article::where('name','=', $name)->get()->first();
 		if (!$article) {
-			return "404 :(";
+			return App::abort(404);
 		}
 		return View::make('frontend.article.index', compact('article','page_title'));
 	}

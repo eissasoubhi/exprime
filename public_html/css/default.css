@@ -269,7 +269,7 @@ body .footer ul a{
     -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
     transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
 }
-.brick:hover .img-close{
+.brick:hover .img-close, html.iemobile .brick .img-close{
     top: 0;
 }
 .brick .hover-btns{
@@ -284,7 +284,7 @@ body .footer ul a{
     -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
     transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
 }
-.brick:hover .hover-btns{
+.brick:hover .hover-btns, html.iemobile .brick .hover-btns{
     bottom: 0;
 }
 
@@ -826,6 +826,10 @@ html.touch button.picture-options-toggle{
 html.touch .brick .img .view-hover,html.touch  button.btn.edit-img{
     display: none!important;
 }
+html.iemobile body button.picture-options-toggle{
+    display: none!important;
+}
+
 /*************************************mobile*/
 /*
 canvas#avpw_canvas_element.avpw_position_by_transform{
