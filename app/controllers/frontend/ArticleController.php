@@ -1,6 +1,6 @@
 <?php
 namespace frontend;
-use View; use Article; use Input; use Redirect; use Validator; use Session; use Email; use Mail;
+use View; use Article; use Input; use Redirect; use Validator; use Session; use Email; use Mail;; use App;
 class ArticleController extends \BaseController {
 
 	public function index($name)
