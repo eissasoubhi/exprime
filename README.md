@@ -45,9 +45,17 @@ the following types of content are not allowed:
 
 #<a name="contact"></a>Contact info
 
+Feel free to contact us if you have any idea or suggestion @ [contact@exprime.org](http://exprime.org/contact).
+
 #<a name="bugs"></a>Known bugs
 
+Text tool in touch screen devices and mobile
+
 #<a name="to-do-list"></a>To do list
+
+- build a custom picture tools to save the two vesions of picture (the original and the edited one ) so that the user can undo the previous saved changes of the edited picture.
+
+- a chrome and firefox extension allows Facebook users to search memes pictures from a dropdown next to Facebook comment filed.
 
 #<a name="Contribute"></a>contribute
 
