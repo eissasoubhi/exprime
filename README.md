@@ -59,10 +59,14 @@ Text tool in touch screen devices and mobile
 
 #<a name="Contribute"></a>contribute
 
-Contributions to this repository are more than welcome. If you want to contribute to this project please follow the steps below:
+Contributions to this repository are more than welcome. 
+If you want to contribute to this project please follow the steps below:
 
 - Clone this repository to your local folder `(e.g local-exprime)`.
+
 - [Install](http://laravel.com/docs/4.2/#install-laravel) Laravel 4.2 framework and move the ignored files and directories in [.gitignore](.gitignore) to the project folder`(local-exprime)`. 
+
+- Replace the Laravel default config with your own values.  
 
 #<a name="license"></a>License
 
