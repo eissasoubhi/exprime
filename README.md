@@ -45,11 +45,28 @@ the following types of content are not allowed:
 
 #<a name="contact"></a>Contact info
 
+Feel free to contact us if you have any idea or suggestion @ [contact@exprime.org](http://exprime.org/contact).
+
 #<a name="bugs"></a>Known bugs
+
+Text tool in touch screen devices and mobile
 
 #<a name="to-do-list"></a>To do list
 
+- build a custom picture tools to save the two vesions of picture (the original and the edited one ) in database. so the user can undo the previous saved changes of the edited picture any time.
+
+- a chrome and firefox extension allows Facebook users to search memes pictures from a dropdown next to Facebook comment filed.
+
 #<a name="Contribute"></a>contribute
+
+Contributions to this repository are more than welcome. 
+If you want to contribute to this project please follow the steps below:
+
+- Clone this repository to your local folder `(e.g local-exprime)`.
+
+- [Install](http://laravel.com/docs/4.2/#install-laravel) Laravel 4.2 framework and move the ignored files and directories in [.gitignore](.gitignore) to the project folder`(local-exprime)`. 
+
+- Replace the Laravel default config with your own values.  
 
 #<a name="license"></a>License
 
