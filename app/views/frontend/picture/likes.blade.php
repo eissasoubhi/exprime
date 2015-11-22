@@ -4,7 +4,10 @@
                 <div class="photos_gallery">
                     <div class="list-thumbs">
                         <div id="container" class="grid-layout">
-                            <?php $new_added_pic_id = Session::get('new_added_pic_id'); ?>
+                            <?php  $new_added_pic_id = Session::get('new_added_pic_id');?>
+                            <script>
+                                {{"var new_added_pic_id = ".(($new_added_pic_id) ? $new_added_pic_id : 0).";"}}
+                            </script>
                             @foreach ($pictures as $key => $picture)
                                 <?php $class= $attr= ""; ?>
                                 @if($picture->id == $new_added_pic_id)
@@ -37,7 +40,7 @@
                                             <a href="{{e(url('img/download/'.$picture->name))}}" title="{{e($picture->name)}}">
                                                 <i class="fa fa-download"></i>
                                             </a>
-                                            @if(Auth::check())
+                                            @if(Auth::check() and ($picture->belongsToUser(Auth::user()) or Auth::user()->hasAnyRole(array('admin','modirator'))))
                                                 <a href="{{e(url('img/edit/'.$picture->id))}}" title="{{e($picture->name)}}">
                                                     <i class="fa fa-pencil-square-o"></i>
                                                 </a>
@@ -141,6 +144,10 @@
                         $(this).fadeIn(500);
                         pagination_position(this);
                         refrechPicEvents();
+                        if (typeof new_added_pic_id !== 'undefined')
+                        {
+                            $(".brick."+new_added_pic_id).addClass('new_added_image animated flash');
+                        }
                         // var url = window.location.origin + window.location.pathname
                         var url = window.location.origin + window.location.pathname
                         var search = "?";

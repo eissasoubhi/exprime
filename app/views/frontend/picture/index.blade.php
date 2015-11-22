@@ -4,9 +4,9 @@
                 <div class="photos_gallery">
                     <div class="list-thumbs">
                         <div id="container" class="grid-layout">
-                            <?php $new_added_pic_id = Session::get('new_added_pic_id'); ?>
+                            <?php  $new_added_pic_id = Session::get('new_added_pic_id');?>
                             <script>
-                                {{"var new_added_pic_id = ".$new_added_pic_id}}
+                                {{"var new_added_pic_id = ".(($new_added_pic_id) ? $new_added_pic_id : 0).";"}}
                             </script>
                             @foreach ($pictures as $key => $picture)
                                 <?php $class= $attr= ""; ?>
