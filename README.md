@@ -24,15 +24,24 @@ Created by [@eissa_soubhi](https://twitter.com/eissa_soubhi)
 
 #<a name="how-to-use"></a>How to use
 
-[Browse](http://exprime.org/explorer) the memes pictures that are sorted by date added or lock for them in search field.
+[Browse](http://exprime.org/explorer) the memes pictures that are sorted by date added or look for them in search field.
 
 Once you found your desired meme picture you can download it or get link so you can share it o add it in your Facebook comments.
 
 Exprime allos you to add your own memes pictures as well, but to do so you must quickly [sign up](http://exprime.org/sign-up).
 
-Having an Exprime account gives access to many further features (your memes pictures favorite list,mems pictures custom text, comments...)
+Having an Exprime account gives access to many further features (your memes pictures favorite list, mems pictures custom text, comments...)
 
 #<a name="terms"></a>Terms of use
+
+The use of this website is subject to the following terms of use:
+
+the following types of content are not allowed:
+
+- immoral content.
+- content advocates violence or harm to a person or animal.
+- content harms or humiliates based on race, religion, sex, orientation or ability.
+- commercial advertisements.
 
 #<a name="contact"></a>Contact info
 
