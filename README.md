@@ -53,11 +53,15 @@ Text tool in touch screen devices and mobile
 
 #<a name="to-do-list"></a>To do list
 
-- build a custom picture tools to save the two vesions of picture (the original and the edited one ) so that the user can undo the previous saved changes of the edited picture.
+- build a custom picture tools to save the two vesions of picture (the original and the edited one ) in database. so the user can undo the previous saved changes of the edited picture any time.
 
 - a chrome and firefox extension allows Facebook users to search memes pictures from a dropdown next to Facebook comment filed.
 
 #<a name="Contribute"></a>contribute
+
+If you want to contribute to this project please follow the steps below:
+
+- Clone this repository to your local folder `(e.g local-exprime)`
 
 #<a name="license"></a>License
 
