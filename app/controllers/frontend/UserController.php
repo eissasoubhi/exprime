@@ -23,7 +23,8 @@ class UserController extends \BaseController {
         if (Auth::check()) {
             return Redirect::to('/');
         }
-        return View::make('frontend.user.sign-up');
+        $page_title = 'Inscrivez vous';
+        return View::make('frontend.user.sign-up', compact('page_title'));
     }
 
         public function doSignUp($user_info = null)
@@ -128,7 +129,8 @@ class UserController extends \BaseController {
         if (Auth::check()) {
             return Redirect::to('/');
         }
-        return View::make('frontend.user.login');
+        $page_title = 'Connectez vous';
+        return View::make('frontend.user.login', compact('page_title'));
     }
 
     public function show($id)
