@@ -3,6 +3,11 @@
 
 View::share('title', "Exprime");
 View::share('page_title', "");
+View::share('website_keywords', "générateur de Memes mobile support, générateur de trolls mobile support
+    images trolls pour commentaires de facebook, images Memes commentaires de facebook, images trolls marocaines,
+    images trolls darija, images trolls arabe dialectal marocain, images Memes marocaines,
+    images Memes darija, images Memes arabe dialectal marocain");
+View::share('page_keywords', "");
 
 $pictures_count = Picture::all()->count();
 $users_count = User::all()->count();

@@ -3,11 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{$title." - ".$page_title}}</title>
+	<title>{{$title." - ".$page_title}}</title> {{-- $page_title and $title are definded in routes file --}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="un site Web permet aux utilisateurs de trouver images Memes qui pourraient être utilisés dans les commentaires Facebook pour être plus expressifs, et ils peuvent également créer leurs propres Memes | a website allows users to find memes pictures that could be used in facebook comments to be more expressive, and they can also create their own memes " />
-    <meta name="keywords" content="générateur de Memes mobile support, télécharger vos propres images pour faire des Memes personnalisés " />
+    <meta name="description" content="Exprime est un site responsive Créé par eissa soubhi,  il permet aux utilisateurs de Facebook notamment les marocains de trouver images (trolls) qui pourraient être utilisés dans les commentaires Facebook pour être plus expressif, et ils peuvent également créer leurs propres images trolls. | Exprime is a responsive website created by eissa soubhi allows Facebook users mostly Moroccan users to find memes pictures that could be used in facebook comments to be more expressive, and they can also create their own memes." />
+    <meta name="keywords" content="{{$website_keywords.', '.$page_keywords}}" />
     <!-- <link rel="shortcut icon" href="{{url('favicon.ico')}}" /> -->
     <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="{{url('icons/favicon.ico')}}" /><![endif]-->
     <link rel="apple-touch-icon" sizes="57x57" href="{{url('icons/apple-touch-icon-57x57.png')}}" />

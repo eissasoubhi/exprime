@@ -53,7 +53,7 @@ h1,h2,h3,h4,h5,h6{
 }
 .description  .text{
     text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.74);
-    margin-top: 65px;
+    margin-top: 25px;
     font-weight: bold;
     line-height: 35px;
     color: #574631;
@@ -915,4 +915,7 @@ canvas#avpw_canvas_element.avpw_position_by_transform{
         -o-transform: rotate(45deg);
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
     }
+}
+h3{
+    color: #615A51;
 }

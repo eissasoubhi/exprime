@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 termes cols">
-                    <a class="terms" href="{{url('page/terms')}}" title="Condition et termes d'utilisation ">Conditions et termes </a>
+                    <a class="terms" href="{{url('page/termes')}}" title="Condition et termes d'utilisation ">Conditions et termes </a>
                 </div>
                 <div class="col-md-3 network cols">
                     <nav class="navbar centered a-bg" role="navigation">
@@ -18,7 +18,7 @@
                     </nav>
                 </div>
                 <div class="col-md-3 copyright cols">
-                    <a  href="{{url('/')}}" title="© Exprime 2015 ">© Exprime 2015 </a>
+                    <a  href="{{url('page/à-propos#licence')}}" title="© Exprime 2015 ">© Exprime 2015 </a>
                 </div>
                 <div class="col-md-3 created cols">
                     <span class="me">Créé par <a href="http://eissa-soubhi.com">E.Soubhi</a></span>

@@ -18,7 +18,7 @@
                @endif
               <form action="" method="POST" accept-charset="utf-8">
                 {{Form::token();}}
-                <div class="col-md-6 col-md-offset-3 register form-block"> 
+                <div class="col-md-6 col-md-offset-3 register form-block">
                     <h1>Inscrivez vous</h1>
                     <a class="sign-in-link" href="{{url('login')}}" title="vous avez déja un compte ?">vous avez déja un compte ?</a>
                     <div class="form-group ">
@@ -59,7 +59,7 @@
 
                     <div class="checkbox">
                       <label>
-                        <input required type="checkbox" name="terms"> J'ai lu les <a href="#" title="Conditions et termes">Conditions et termes</a> d'utilisation
+                        <input required type="checkbox" name="terms"> J'ai lu les <a href="{{url('page/termes')}}" title="Condition et termes d'utilisation " >Conditions et termes</a> d'utilisation
                       </label>
                     </div>
                     <button type="submit" name="sign-up-submit" class="show-overly btn btn-block btn-primary"><span class="glyphicon glyphicon-ok"></span> S'inscrire</button>
@@ -69,8 +69,8 @@
                       <a class="sn-google btn btn-block " href="{{url('gauth')}}" title="Connexion avec votre compte Google"><i class="fa fa-google-plus"></i>Se connecter avec un compte Google</a>
                     </div>
                 </div>
-              </form>   
-                
+              </form>
+
             </div>
 
         </div>

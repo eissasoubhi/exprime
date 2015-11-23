@@ -28,7 +28,7 @@ Created by [@eissa_soubhi](https://twitter.com/eissa_soubhi)
 
 Once you found your desired meme picture you can download it or get link so you can share it o add it in your Facebook comments.
 
-Exprime allos you to add your own memes pictures as well, but to do so you must quickly [sign up](http://exprime.org/sign-up).
+Exprime allows you to add your own memes pictures as well, but to do so you must quickly [sign up](http://exprime.org/sign-up).
 
 Having an Exprime account gives access to many further features (your memes pictures favorite list, mems pictures custom text, comments...)
 
@@ -53,11 +53,11 @@ Text tool in touch screen devices and mobile
 
 #<a name="to-do-list"></a>To do list
 
-- build a custom picture tools to save the two vesions of picture (the original and the edited one ) in database. so the user can undo the previous saved changes of the edited picture any time.
+- build a custom picture tools to save the two versions of picture (the original and the edited one ) in database. so the user can undo the previous saved changes of the edited picture any time.
 
-- a chrome and firefox extension allows Facebook users to search memes pictures from a dropdown next to Facebook comment filed.
+- a chrome and firefox extension allows Facebook users to search memes pictures from a dropdown next to Facebook comment field.
 
-#<a name="Contribute"></a>contribute
+#<a name="contribute"></a>Contribute
 
 Contributions to this repository are more than welcome. 
 If you want to contribute to this project please follow the steps below:

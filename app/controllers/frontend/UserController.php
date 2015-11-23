@@ -138,9 +138,10 @@ class UserController extends \BaseController {
 
     public function edit()
     {
-        $page_title = "Profil";
         $user = User::find(Auth::id());
-        return View::make('frontend.user.profile', compact('user', 'page_title'));
+        $page_title = "Profil - ".(($user->l_name and $user->f_name) ? $user->l_name.' '.$user->f_name : $user->login);
+        $page_keywords = $user->login.', '.$user->l_name.' '.$user->f_name;
+        return View::make('frontend.user.profile', compact('user', 'page_title', 'page_keywords'));
     }
 
     public function update()

@@ -7,19 +7,24 @@ class PictureController extends \BaseController {
 	public function index()
 	{
 		$page_title = "Explorer";
+		$page_keywords = "";
 		Session::flash('jscroll_resources', '1');
 		Session::flash('freewall_resources', '1');
 		Session::flash('visible_resources', '1');
         $pictures = Picture::orderBy('created_at', 'DESC')->simplePaginate(16);
-		return View::make('frontend.picture.index', compact('pictures','page_title'));
+        foreach ($pictures as $picture) {
+        	$page_keywords.= (($picture->name()) ? $picture->name() : $picture->firstKeyWord).', ' ;
+        }
+		return View::make('frontend.picture.index', compact('pictures','page_title','page_keywords'));
 	}
 
 	public function create()
 	{
 		$page_title = "Uploader";
+		$page_keywords = "générateur de Memes ou images trolls supporté par mobile pour les commentaires de facbook";
 		Session::flash('feather', '1');
 		Session::flash('ajax_file_upload_resources', '1');
-		return View::make('frontend.picture.create', compact('page_title'));
+		return View::make('frontend.picture.create', compact('page_title', 'page_keywords'));
 	}
 
 	public function keywords()
@@ -148,8 +153,10 @@ class PictureController extends \BaseController {
 
 	public function show($id)
 	{
-		$page_title = "nom de l'image";
 		$image = Picture::find($id);
+		$page_title = ($image->name()) ? $image->name() : $image->firstKeyWord;
+		$page_keywords = $image->name().', ';
+
 		$picture_keywords = array();
 		foreach ($image->keywords as $key => $kw)
 		{
@@ -157,7 +164,8 @@ class PictureController extends \BaseController {
 		}
 		// return dd($picture->comments()->get()[0]);
 		$keywords = implode(",", $picture_keywords);
-		return View::make('frontend.picture.show',compact('image','keywords','page_title'));
+		$page_keywords.= $keywords;
+		return View::make('frontend.picture.show',compact('image','keywords','page_title','page_keywords'));
 	}
 
 	public function edit($id)
@@ -471,11 +479,13 @@ class PictureController extends \BaseController {
 		foreach (Auth::user()->likes()->get() as $like) {
 			$likes_ids[] = $like->picture_id;
 		}
-
-
+		$page_keywords = "";
         $pictures = Picture::whereIn('id', $likes_ids)->simplePaginate(16);
         // return $likes_ids;
-		return View::make('frontend.picture.likes', compact('pictures','page_title'));
+        foreach ($pictures as $picture) {
+        	$page_keywords.= (($picture->name()) ? $picture->name() : $picture->firstKeyWord).', ' ;
+        }
+		return View::make('frontend.picture.likes', compact('pictures','page_title','page_keywords'));
 	}
 
 	public function search()
@@ -560,7 +570,12 @@ class PictureController extends \BaseController {
 		Session::flash('freewall_resources', '1');
 		Session::flash('visible_resources', '1');
 		$pictures->appends('q',$searched_words);
-		return View::make('frontend.picture.index', compact('pictures', 'searched_words'));
+		$page_keywords = $searched_words;
+		foreach ($pictures as $picture) {
+        	$page_keywords.= (($picture->name()) ? $picture->name() : $picture->firstKeyWord).', ' ;
+        }
+		$page_title = "Recheche - ".$searched_words;
+		return View::make('frontend.picture.index', compact('pictures', 'searched_words','page_keywords', 'page_title'));
 	}
 
 	public function download($name)

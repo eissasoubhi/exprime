@@ -65,7 +65,8 @@ Route::filter('pic_permission', function($route)
 	{
 		App::abort(404);
 	}
-	if (Auth::guest() or !$picture->belongsToUser(Auth::user()) or !Auth::user()->hasAnyRole(array('admin','modirator')))
+	// if (Auth::guest() or (!$picture->belongsToUser(Auth::user()) and !Auth::user()->hasAnyRole(array('admin','modirator'))))
+	if(Auth::guest() or !($picture->belongsToUser(Auth::user()) or Auth::user()->hasAnyRole(array('admin','modirator'))))
 	{
 		$page_title = "page 401 :(";
 		$article = Article::where('name','=', '401')->get()->first();

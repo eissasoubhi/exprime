@@ -49,7 +49,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-/*	Log::error($exception);
+	Log::error($exception);
 
 	$url = Request::url();
 	$code = $exception->getCode();
@@ -73,12 +73,6 @@ App::error(function(Exception $exception, $code)
 							'fatal' => $fatal,
 							'type' => $type));
 	}
-
-	// dd($exception);
-
-	* todo : fontend view for error
-
-	// return ":( Erreur s'est produite ! ";
 
 });
 
@@ -105,12 +99,7 @@ App::fatal(function($exception)
 							'fatal' => $fatal,
 							'type' => $type));
 	}
-	*/
-	// dd($exception);
-	/*
-	* todo : fontend view for error
-	*/
-	// return ":( Erreur s'est produite ! ";
+
 });
 App::missing(function($exception)
 {
