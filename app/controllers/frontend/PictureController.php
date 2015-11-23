@@ -572,7 +572,7 @@ class PictureController extends \BaseController {
 		$pictures->appends('q',$searched_words);
 		$page_keywords = $searched_words;
 		foreach ($pictures as $picture) {
-        	$page_keywords.= (($picture->name()) ? $picture->name() : $picture->firstKeyWord).', ' ;
+        	$page_keywords.= ','.(($picture->name()) ? $picture->name() : $picture->firstKeyWord).', ' ;
         }
 		$page_title = "Recheche - ".$searched_words;
 		return View::make('frontend.picture.index', compact('pictures', 'searched_words','page_keywords', 'page_title'));
