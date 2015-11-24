@@ -56,8 +56,8 @@ App::error(function(Exception $exception, $code)
 	$msg = $exception->getMessage();
 	$file = $exception->getFile();
 	$line =$exception->getLine();
-	$file_in_db = mysql_real_escape_string ($file);
-	$line_in_db =mysql_real_escape_string ($line);
+	$file_in_db =  ($file);
+	$line_in_db = ($line);
 
 	$fatal = 0;
 
@@ -83,8 +83,8 @@ App::fatal(function($exception)
 	$msg = $exception->getMessage();
 	$file = $exception->getFile();
 	$line =$exception->getLine();
-	$file_in_db = mysql_real_escape_string ($file);
-	$line_in_db =mysql_real_escape_string ($line);
+	$file_in_db =  ($file);
+	$line_in_db = ($line);
 	$fatal = 1;
 
 	if(!Error::whereRaw("url = '$url' and code = '$code' and file = '$file_in_db' and line = $line_in_db")->exists()){

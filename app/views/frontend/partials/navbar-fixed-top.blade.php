@@ -26,7 +26,7 @@
 		                        <button type="submit" class="btn btn-default " ><i class="fa fa-search"></i></button>
 		                    </span>
 
-		                    <input data-role="keyword-search" type="text" class="keyword-search form-control span6" placeholder="Recherche par mot clés..." name="q" value="{{$searched_words or ''}}">
+		                    <input data-role="keyword-search" type="text" class="keyword-search form-control span6" placeholder="Recherche par mots clés..." name="q" value="{{$searched_words or ''}}">
 		                    <!-- <span class="input-group-btn">
                             <select class="search_options" multiple="multiple">
                                 <optgroup label="Texte options">

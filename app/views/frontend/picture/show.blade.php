@@ -11,7 +11,7 @@
                             <a href="{{url('img/edit/'.$image->id)}}" class="btn btn-default "><i class="fa fa-edit"> Modifier</i></a>
                         @endif
                           <a href="{{url('img/download/'.$image->name)}}" class="btn btn-default"><i class="fa fa-download"> Téléchargez </i></a>
-                          <a class="btn btn-default" data-toggle="modal" data-target="#picture-link" data-link="{{url('content/'.$image->name)}}"><i class="fa fa-link"> Lien</i></a>
+                          <a class="btn btn-default" data-toggle="modal" data-target="#picture-link" data-pic-link="{{url('content/'.$image->name)}}"><i class="fa fa-link"> Lien</i></a>
                           @if(Auth::check())
                               <a class="btn btn-default img-like-btn-text" data-img-like="{{url('img/toggleLike/'.$image->id)}}">
                                     @if(Auth::check() && $image->isLiked(Auth::user()->id))
@@ -121,32 +121,5 @@
                 @endif
         </div>
     </div><!-- /.container -->
-    <div class="modal fade" id="picture-link" tabindex="-1" role="dialog" aria-labelledby="picture-linkLabel" aria-hidden="true">
-      <div class="modal-dialog ">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="picture-linkLabel">Lien de l'image</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-                <label for="pic-link" class="control-label">ctrl+v pour copier le lien dans le presse papier.</label>
-                <input type="text" class="form-control" id="pic-link">
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" onclick='' data-dismiss="modal">Fermer</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script>
-    jQuery(document).ready(function($)
-    {
-        $('#picture-link').on('shown.bs.modal', function (e)
-        {
-            $(this).find('#pic-link').val($(e.relatedTarget).attr('data-link')).select();
-        })
-    });
-    </script>
+    @include('frontend.partials.picture_link_modal')
   @stop

@@ -184,7 +184,7 @@ class UserController extends \BaseController {
         $user->password_reset_token = $token;
         $user->save();
 
-        Mail::queue('emails.auth.reminder', array("token" => $token), function($message) {
+        Mail::send('emails.auth.reminder', array("token" => $token), function($message) {
             $message->to(Auth::user()->email, Auth::user()->login)
                     ->subject('Réinitialisation de mot de passe Exprime');
         });
