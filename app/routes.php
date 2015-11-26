@@ -9,17 +9,49 @@ View::share('website_keywords', "générateur de Memes mobile support, générat
     images Memes darija, images Memes arabe dialectal marocain");
 View::share('page_keywords', "");
 
-$pictures_count = Picture::all()->count();
-$users_count = User::all()->count();
-$emails_count = Email::all()->count();
-$bugs_count = 0;
-$sugs_count = 0;
 
-View::share('pictures_count', $pictures_count);
-View::share('users_count', $users_count);
-View::share('emails_count', $emails_count);
-View::share('bugs_count', $bugs_count);
-View::share('sugs_count', $sugs_count);
+
+if(starts_with(Request::path(),'admin'))
+{
+    // dd(Session::all());
+    $pictures_count = Picture::all()->count();
+    $users_count = User::all()->count();
+    $emails_count = Email::all()->count();
+    $bugs_count = 0;
+    $sugs_count = 0;
+
+    $old_pictures_count = Session::get('old_pictures_count', $pictures_count);
+    $old_users_count = Session::get('old_users_count', $users_count);
+    $old_emails_count = Session::get('old_emails_count', $emails_count);
+    $old_bugs_count = Session::get('old_bugs_count',$bugs_count);
+    $old_sugs_count = Session::get('old_sugs_count',$sugs_count);
+
+    Session::set('old_pictures_count', $pictures_count);
+    Session::set('old_users_count', $users_count);
+    Session::set('old_emails_count', $emails_count);
+    Session::set('old_bugs_count', $bugs_count);
+    Session::set('old_sugs_count', $sugs_count);
+
+    $new_pictures = $pictures_count - $old_pictures_count;
+    $new_users = $users_count - $old_users_count;
+    $new_emails = $emails_count - $old_emails_count;
+    $new_bugs = $bugs_count - $old_bugs_count;
+    $new_sugs = $sugs_count - $old_sugs_count;
+
+
+    View::share('pictures_count', $pictures_count);
+    View::share('users_count', $users_count);
+    View::share('emails_count', $emails_count);
+    View::share('bugs_count', $bugs_count);
+    View::share('sugs_count', $sugs_count);
+    View::share('new_pictures', $new_pictures);
+    View::share('new_users', $new_users);
+    View::share('new_emails', $new_emails);
+    View::share('new_bugs', $new_bugs);
+    View::share('new_sugs', $new_sugs);
+};
+
+
 
 Route::when('admin/*', 'admin');
 Route::when('admin', 'admin');

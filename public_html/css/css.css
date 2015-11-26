@@ -53,6 +53,9 @@ a:hover, button.a:hover{
  	position: relative;
 	padding: 20px 33px  20px 20px;
 	background-color: rgba(255, 255, 255, 0.55);
+    max-width: 147px;
+    box-sizing: border-box;
+    white-space: nowrap
 }
  .header ul li:hover{
 	background-color: rgba(255, 255, 255, 0.72);
