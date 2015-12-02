@@ -412,13 +412,18 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
     });
 
     $('[data-href]').click(function(event) {
-        event.stopPropagation();
         // alert('this : ' + $(this).attr('class'))
         // alert('event.target : ' + $(event.target).attr('class'))
         if(this === (event.target || event.srcElement))
         {
             document.location.href = $(this).attr('data-href');
         }
+    });
+
+    $('[data-pic-link]').click(function(event) {
+        target_modal = $(this).attr("data-target");
+        $(target_modal).modal();
+        $(target_modal).find('#pic-link').val($(this).attr('data-pic-link')).select();
     });
 
 });

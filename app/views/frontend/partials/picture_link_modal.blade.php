@@ -22,7 +22,7 @@
     {
         $('#picture-link').on('shown.bs.modal', function (e)
         {
-            $(this).find('#pic-link').val($(e.relatedTarget).attr('data-pic-link')).select();
+            $(this).find('#pic-link').select();
         })
     });
     </script>
