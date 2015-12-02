@@ -41,11 +41,9 @@
                                                 <i class="fa fa-download"></i>
                                             </a>
                                             <a  data-toggle="modal" data-target="#picture-link" data-pic-link="{{url('content/'.$picture->name)}}"><i class="fa fa-link"></i></a>
-                                            @if(Auth::check())
-                                                <a href="{{e(url('img/edit/'.$picture->id))}}" title="{{e($picture->name)}}">
-                                                    <i class="fa fa-pencil-square-o"></i>
-                                                </a>
-                                            @endif
+                                            <a href="{{e(url('img/edit/'.$picture->id))}}" title="{{e($picture->name)}}">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                            </a>
                                             @if(Auth::check())
                                                 <a target="_blank" class="img-like-btn" data-img-like="{{url('img/toggleLike/'.$picture->id)}}" title="">
                                                     @if($picture->has('likes'))
