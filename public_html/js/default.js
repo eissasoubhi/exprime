@@ -411,8 +411,8 @@ $( ".brick .hover-btns ,.brick .img-close" ).hover(function() {
         };
     });
 
-    $('[data-href]').on('click',function(event) {
-
+    $('[data-href]').click(function(event) {
+        event.stopPropagation();
         // alert('this : ' + $(this).attr('class'))
         // alert('event.target : ' + $(event.target).attr('class'))
         if(this === (event.target || event.srcElement))
