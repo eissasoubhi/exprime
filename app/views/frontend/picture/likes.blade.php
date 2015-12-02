@@ -40,7 +40,7 @@
                                             <a href="{{e(url('img/download/'.$picture->name))}}" title="{{e($picture->name)}}">
                                                 <i class="fa fa-download"></i>
                                             </a>
-                                            <a  data-toggle="modal" data-target="#picture-link" data-pic-link="{{url('content/'.$picture->name)}}"><i class="fa fa-link"></i></a>
+                                            <a  data-target="#picture-link" data-pic-link="{{url('content/'.$picture->name)}}"><i class="fa fa-link"></i></a>
 
                                             <a href="{{e(url('img/edit/'.$picture->id))}}" title="{{e($picture->name)}}">
                                                 <i class="fa fa-pencil-square-o"></i>
@@ -129,6 +129,12 @@
                     {
                         document.location.href = $(this).attr('data-href');
                     }
+                });
+
+                $('[data-pic-link]').click(function(event) {
+                    target_modal = $(this).attr("data-target");
+                    $(target_modal).modal();
+                    $(target_modal).find('#pic-link').val($(this).attr('data-pic-link')).select();
                 });
 
             }

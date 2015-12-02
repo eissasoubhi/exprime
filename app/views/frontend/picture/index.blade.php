@@ -130,6 +130,12 @@
                     }
                 });
 
+                $('[data-pic-link]').click(function(event) {
+                    target_modal = $(this).attr("data-target");
+                    $(target_modal).modal();
+                    $(target_modal).find('#pic-link').val($(this).attr('data-pic-link')).select();
+                });
+
             }
 
             jQuery(document).ready(function($) {
