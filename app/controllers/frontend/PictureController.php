@@ -171,6 +171,8 @@ class PictureController extends \BaseController {
 	public function edit($id)
 	{
 		$page_title = "Modifier l'image";
+
+		$next = (Input::has("next")) ? 'next='.Input::get("next") : "" ;
 		$image = Picture::find($id);
 		$picture_keywords = array();
 		foreach ($image->keywords as $key => $kw) {
@@ -179,7 +181,7 @@ class PictureController extends \BaseController {
 		$keywords = implode(",", $picture_keywords);
 		Session::flash('feather', '1');
 		Session::flash('ajax_file_upload_resources', '1');
-		return View::make('frontend.picture.edit',compact('image','keywords','page_title'));
+		return View::make('frontend.picture.edit',compact('image','keywords','page_title','next'));
 	}
 
 	public function update($id)
@@ -324,7 +326,7 @@ class PictureController extends \BaseController {
 			// return "id : ".$image->id.", count : ".$picCount.", floor : ".$page;
 			// return "explorer ".$picCount;
 			// dd($full_name);
-			return Redirect::to("explorer".$param)->with("new_added_pic_id", $image->id);
+			return Redirect::to(Input::get("next", "explorer".$param))->with("new_added_pic_id", $image->id);
 		}
 	}
 

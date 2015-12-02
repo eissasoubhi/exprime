@@ -65,6 +65,8 @@ Route::group([ 'prefix' => 'admin', 'namespace' => 'backend' ], function () {
 
     Route::post('picture/checkExists', array('as' => 'checkExists', 'uses' =>  'PictureController@checkExists'));
     Route::post('picture/upload', array('as' => 'upload', 'uses' =>  'PictureController@upload'));
+    Route::get('picture/unnamed', array('as' => 'unnamed_pic', 'uses' =>  'PictureController@withoutNameAndKeywords'));
+    Route::get('picture/named', array('as' => 'named_pic', 'uses' =>  'PictureController@withNameOrKeywords'));
 
 
 	Route::resource('role', 'RoleController');

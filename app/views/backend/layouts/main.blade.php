@@ -32,7 +32,7 @@
 	<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				currentPage = '{{url(Route::current()->getPath())}}';
-				$('.left_menu a[href="'+ currentPage +'"]').addClass('current');
+				$('.left_menu a[href="'+ currentPage +'"], .photos_btn_menu a[href="'+ currentPage +'"]').addClass('current');
 			});
 	</script>
     <script>

@@ -3,7 +3,7 @@
     <div class="container-fluid page">
         <div class="content container">
             <div class="row fadeIn wow animated">
-              {{ Form::open(array('url' => 'img/edit/'.$image->id, 'class' => 'img-upload', 'enctype' => 'multipart/form-data')) }}
+              {{ Form::open(array('url' => 'img/edit/'.$image->id.'?'.$next, 'class' => 'img-upload', 'enctype' => 'multipart/form-data')) }}
                 <div class="col-md-3" >
                   <div class="form-block">
                     <div class="form-group ">

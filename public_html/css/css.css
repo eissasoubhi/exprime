@@ -113,7 +113,8 @@ a:hover, button.a:hover{
 }
 .photos_btn_menu {
 	margin: 20px auto;
-	width: 345px;
+	width: 100%;
+	text-align: center;
 }
 .photos_btn_menu ul a:hover{
 	background-color: rgba(189, 83, 0, 0.75);
@@ -525,4 +526,7 @@ button.a{
 }
 .brick .btn-form button.a:hover{
 	color: #FAA35F;
+}
+.photos_btn_menu ul a.current{
+	background-color: #C89064;
 }

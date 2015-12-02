@@ -1,6 +1,6 @@
 <?php
 namespace backend;
-use View; use Picture; use Input; use Redirect; use Validator; use Session; use Auth; use Hash; use Resize; 
+use View; use Picture; use Input; use Redirect; use Validator; use Session; use Auth; use Hash; use Resize;
 use File; use Keyword;
 class PictureController extends \BaseController {
 
@@ -58,13 +58,13 @@ class PictureController extends \BaseController {
 			    		'height' => 'required|integer|min:207',
 			    		'size' => 'required|integer|max:1048576')
 			);
-			
+
 			if ($validator->fails())
 			{
 				$messages = $validator->messages();
 			    return "erreur d'insertion de la photo $name !";
 			}
-			
+
 
 			Picture::create(array('name' => $name,
 							'user_id' => Auth::id(),
@@ -74,8 +74,8 @@ class PictureController extends \BaseController {
 							'size' => $size));
 			return "1";
 		}
-		
-		
+
+
 	}
 
 
@@ -118,7 +118,7 @@ class PictureController extends \BaseController {
 	{
 
 		$picture = Picture::find($id);
-		
+
 		if (Input::file('new_picture')) {
 
 			if (!Input::file('new_picture')->isValid())
@@ -161,7 +161,7 @@ class PictureController extends \BaseController {
 			    		'height' => 'required|integer|min:207',
 			    		'size' => 'required|integer|max:1048576') // 1MB
 				);
-				
+
 				if ($validator->fails())
 				{
 					$messages = $validator->messages();
@@ -176,32 +176,32 @@ class PictureController extends \BaseController {
 						$errors[] = 'Erreur de suppresssion de la photo de serveur !';
 						return Redirect::route("admin/picture/$id/edit")->withErrors($errors);
 					}
-				} 
+				}
 
 				Input::file('new_picture')->move($targetPath, $full_name);
-				
+
 				if ($width > 550 || $height > 400) {
-					
+
 					$targetFile = rtrim($targetPath,'/') . '/' . $full_name;
-					
+
 					$resizeObj = new Resize($targetFile);
 					// *** 2) Resize image (options: exact, portrait, landscape, auto, crop)
 					$resizeObj -> resizeImage(550, 400, 'auto');
-					
+
 					$resizeObj -> saveImage($targetFile, 100);
-					
+
 					list($width, $height) = getimagesize($targetFile);
 
 					$size = filesize($targetFile);
 				}
-				
+
 				$picture->name = $full_name;
 				$picture->url_origin = $full_name;
 				$picture->dimension = $width."x".$height;
 				$picture->size = $size;
-				
+
 			}
-			
+
 		}
 
 		$picture->validated = Input::get("validated");
@@ -241,19 +241,19 @@ class PictureController extends \BaseController {
 			{
 				$errors[] = 'Erreur de suppresssion de la photo de serveur !';
 			}
-		} 
+		}
 		if ( count($errors) > 0	) {
 			return Redirect::route('admin.picture.index')->withErrors($errors);
 		}
 		if ( count($messages) > 0	) {
 			return Redirect::back()->withMessages($messages);
 		}
-		
+
 	}
 
 	public function checkExists()
 	{
-		$targetFolder = '/content'; 
+		$targetFolder = '/content';
 
 		if (file_exists(public_path() . $targetFolder . '/' . Input::get('filename') )) {
 			return 1;
@@ -299,7 +299,7 @@ class PictureController extends \BaseController {
 			    		'height' => 'required|integer|min:207',
 			    		'size' => 'required|integer|max:1048576')
 				);
-				
+
 				if ($validator->fails())
 				{
 					$messages = $validator->messages();
@@ -323,7 +323,7 @@ class PictureController extends \BaseController {
 
 					$size = filesize($targetFile);
 				}
-				
+
 				$imageinfos = array('name' => $full_name,
 									'extension' => $extension,
 									'width' => $width,
@@ -337,5 +337,18 @@ class PictureController extends \BaseController {
 				return  'Invalid file type.';
 			}
 		}
+	}
+	public function withoutNameAndKeywords()
+	{
+		Session::flash('jscroll_resources', '1');
+		$pictures = Picture::whereRaw("((LENGTH(name) - LENGTH(REPLACE(name, '_', '')))/LENGTH('_')) <= 1")->paginate(12);
+		return View::make('backend.user.index', compact('pictures'));
+	}
+
+	public function withNameOrKeywords()
+	{
+		Session::flash('jscroll_resources', '1');
+		$pictures = Picture::whereRaw("((LENGTH(name) - LENGTH(REPLACE(name, '_', '')))/LENGTH('_')) > 1")->paginate(12);
+		return View::make('backend.user.index', compact('pictures'));
 	}
 }
