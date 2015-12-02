@@ -120,7 +120,7 @@
                     };
                 });
 
-                $('[data-href]').click(function(event) {
+                ('[data-href]').on('click',function(event) {
                     event.stopPropagation();
                     // alert('this : ' + $(this).attr('class'))
                     // alert('event.target : ' + $(event.target).attr('class'))
