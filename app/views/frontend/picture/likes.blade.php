@@ -40,7 +40,7 @@
                                             <a href="{{e(url('img/download/'.$picture->name))}}" title="{{e($picture->name)}}">
                                                 <i class="fa fa-download"></i>
                                             </a>
-                                            @if(Auth::check() and ($picture->belongsToUser(Auth::user()) or Auth::user()->hasAnyRole(array('admin','modirator'))))
+                                            @if(Auth::check())
                                                 <a href="{{e(url('img/edit/'.$picture->id))}}" title="{{e($picture->name)}}">
                                                     <i class="fa fa-pencil-square-o"></i>
                                                 </a>
